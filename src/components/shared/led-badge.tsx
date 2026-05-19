@@ -7,22 +7,15 @@ interface LEDBadgeProps {
 }
 
 export function LEDBadge({ label, color = "blue", className }: LEDBadgeProps) {
+  void color; // color prop kept for API compatibility; badge is now neutral
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium",
-        color === "blue"
-          ? "bg-ef-blue/10 text-ef-blue border border-ef-blue/20"
-          : "bg-ef-red/10 text-ef-red border border-ef-red/20",
+        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-xs font-normal tracking-wide",
+        "bg-white/[0.05] text-ef-dim border border-white/[0.07]",
         className
       )}
     >
-      <span
-        className={cn(
-          "w-1.5 h-1.5 rounded-full animate-led-pulse",
-          color === "blue" ? "bg-ef-blue" : "bg-ef-red"
-        )}
-      />
       {label}
     </span>
   );

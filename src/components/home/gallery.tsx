@@ -5,58 +5,41 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { cn } from "@/lib/utils";
 
 const galleryItems = [
-  { gradient: "from-blue-950 via-slate-900 to-indigo-950", label: "Mesa de luz LED", span: "col-span-2 row-span-2", accentColor: "blue" as const },
-  { gradient: "from-zinc-800 via-zinc-900 to-black", label: "Placard minimalista", span: "col-span-1 row-span-1", accentColor: "blue" as const },
-  { gradient: "from-red-950 via-slate-900 to-black", label: "Setup Gamer", span: "col-span-1 row-span-1", accentColor: "red" as const },
-  { gradient: "from-slate-800 via-slate-900 to-black", label: "Escritorio premium", span: "col-span-1 row-span-2", accentColor: "blue" as const },
-  { gradient: "from-indigo-950 via-blue-950 to-black", label: "Living LED", span: "col-span-2 row-span-1", accentColor: "blue" as const },
-  { gradient: "from-red-950 via-rose-950 to-black", label: "Cama tapizada", span: "col-span-1 row-span-1", accentColor: "red" as const },
-  { gradient: "from-zinc-700 via-zinc-800 to-black", label: "Home Office", span: "col-span-1 row-span-1", accentColor: "blue" as const },
+  { tone: "from-[#111] via-[#0e0e0e] to-[#0a0a0a]", label: "Mesa de luz", span: "col-span-2 row-span-2" },
+  { tone: "from-[#0f0f0f] via-[#0d0d0d] to-[#0a0a0a]", label: "Placard a medida", span: "col-span-1 row-span-1" },
+  { tone: "from-[#120d0d] via-[#0f0f0f] to-[#0a0a0a]", label: "Escritorio premium", span: "col-span-1 row-span-1" },
+  { tone: "from-[#0d0d0f] via-[#0f0f0f] to-[#0a0a0a]", label: "Home office", span: "col-span-1 row-span-2" },
+  { tone: "from-[#0f0f0f] via-[#0e0e0e] to-[#0a0a0a]", label: "Living room", span: "col-span-2 row-span-1" },
+  { tone: "from-[#11100a] via-[#0f0f0f] to-[#0a0a0a]", label: "Cocina moderna", span: "col-span-1 row-span-1" },
+  { tone: "from-[#0f0f0f] via-[#0d0d0d] to-[#0a0a0a]", label: "Dormitorio", span: "col-span-1 row-span-1" },
 ];
 
-function GalleryCard({
-  item,
-  index,
-}: {
-  item: (typeof galleryItems)[0];
-  index: number;
-}) {
+function GalleryCard({ item, index }: { item: (typeof galleryItems)[0]; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, delay: index * 0.07 }}
-      className={cn("group relative rounded-2xl overflow-hidden cursor-pointer", item.span)}
+      transition={{ duration: 0.6, delay: index * 0.06, ease: [0.25, 0.1, 0.25, 1] }}
+      className={cn("group relative rounded-lg overflow-hidden cursor-pointer", item.span)}
       style={{ minHeight: "160px" }}
     >
       <div
         className={cn(
-          "absolute inset-0 bg-gradient-to-br transition-transform duration-500 group-hover:scale-105",
-          item.gradient
+          "absolute inset-0 bg-gradient-to-br transition-transform duration-700 group-hover:scale-[1.03]",
+          item.tone
         )}
       />
-      {/* LED line at bottom */}
-      <div
-        className={cn(
-          "absolute bottom-0 left-8 right-8 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-          item.accentColor === "blue" ? "led-line" : "led-line-red"
-        )}
-      />
-      {/* Glow */}
-      <div
-        className={cn(
-          "absolute bottom-0 left-0 right-0 h-16 opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-xl",
-          item.accentColor === "blue" ? "bg-ef-blue" : "bg-ef-red"
-        )}
-      />
-      {/* Interior detail */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-20">
-        <div className="w-1/2 h-1/2 border border-white/10 rounded-lg" />
+
+      {/* Architectural grid lines — very subtle */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div className="absolute top-6 left-6 right-6 h-px bg-white/[0.06]" />
+        <div className="absolute top-6 left-6 bottom-6 w-px bg-white/[0.06]" />
       </div>
-      {/* Label */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span className="text-xs font-medium text-ef-white">{item.label}</span>
+
+      {/* Label — appears on hover, editorial style */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <span className="text-xs font-light text-ef-white/80 tracking-wide">{item.label}</span>
       </div>
     </motion.div>
   );
@@ -73,9 +56,9 @@ export function Gallery() {
           description="Cada proyecto es único. Mirá cómo transformamos espacios reales en experiencias visuales extraordinarias."
         />
 
-        {/* Masonry-style grid */}
+        {/* Desktop masonry grid */}
         <div
-          className="grid gap-4"
+          className="hidden md:grid gap-3"
           style={{
             gridTemplateColumns: "repeat(4, 1fr)",
             gridTemplateRows: "repeat(3, 160px)",
@@ -86,23 +69,23 @@ export function Gallery() {
           ))}
         </div>
 
-        {/* Mobile: simple grid */}
-        <div className="grid grid-cols-2 gap-4 md:hidden mt-4">
+        {/* Mobile: simple 2-col */}
+        <div className="grid grid-cols-2 gap-3 md:hidden">
           {galleryItems.map((item, i) => (
             <motion.div
               key={`mob-${i}`}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
               className={cn(
-                "group relative h-36 rounded-xl overflow-hidden",
+                "group relative h-36 rounded-lg overflow-hidden",
                 i === 0 ? "col-span-2" : ""
               )}
             >
-              <div className={cn("absolute inset-0 bg-gradient-to-br", item.gradient)} />
+              <div className={cn("absolute inset-0 bg-gradient-to-br", item.tone)} />
               <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
-                <span className="text-xs text-ef-white font-medium">{item.label}</span>
+                <span className="text-xs text-ef-white/70 font-light">{item.label}</span>
               </div>
             </motion.div>
           ))}

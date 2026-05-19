@@ -6,15 +6,13 @@ import { ArrowUpRight, Zap, Wifi, Usb } from "lucide-react";
 import { SectionHeader } from "@/components/shared/section-header";
 import { LEDBadge } from "@/components/shared/led-badge";
 import { featuredProducts } from "@/lib/data/products";
-import { cn } from "@/lib/utils";
 
-const categoryGradients: Record<string, string> = {
-  dormitorio:
-    "from-blue-950/80 via-slate-900/60 to-transparent",
-  gamer: "from-red-950/80 via-slate-900/60 to-transparent",
-  living: "from-indigo-950/80 via-slate-900/60 to-transparent",
-  oficina: "from-zinc-800/80 via-zinc-900/60 to-transparent",
-  cocina: "from-stone-800/80 via-zinc-900/60 to-transparent",
+const categoryTones: Record<string, string> = {
+  dormitorio: "from-[#111] via-[#0f0f0f] to-[#0a0a0a]",
+  gamer:      "from-[#120a0a] via-[#0f0f0f] to-[#0a0a0a]",
+  living:     "from-[#0a0a10] via-[#0f0f0f] to-[#0a0a0a]",
+  oficina:    "from-[#0f0f0f] via-[#111] to-[#0a0a0a]",
+  cocina:     "from-[#10100e] via-[#0f0f0f] to-[#0a0a0a]",
 };
 
 export function FeaturedProducts() {
@@ -32,81 +30,53 @@ export function FeaturedProducts() {
           {featuredProducts.map((product, i) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              transition={{ duration: 0.6, delay: i * 0.07, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <Link
                 href={`/catalogo/${product.slug}`}
-                className="group block glass glass-hover rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                className="group block glass rounded-xl overflow-hidden transition-all duration-400 hover:-translate-y-1 hover:border-white/10"
               >
                 {/* Visual */}
                 <div className="relative h-52 overflow-hidden">
                   <div
-                    className={cn(
-                      "absolute inset-0 bg-gradient-to-br",
-                      product.gradient
-                    )}
+                    className={`absolute inset-0 bg-gradient-to-br ${categoryTones[product.category] ?? "from-[#111] to-[#0a0a0a]"}`}
                   />
-                  {/* LED glow effect */}
-                  <div
-                    className={cn(
-                      "absolute bottom-0 left-0 right-0 h-16 blur-xl opacity-40",
-                      product.accentColor === "blue"
-                        ? "bg-ef-blue"
-                        : "bg-ef-red"
-                    )}
-                  />
-                  {/* Furniture silhouette */}
+
+                  {/* Architectural furniture silhouette */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative">
-                      <div className="w-28 h-16 rounded-lg bg-white/5 border border-white/10 shadow-2xl" />
-                      {product.hasLED && (
-                        <div
-                          className={cn(
-                            "absolute -bottom-1 left-2 right-2 h-0.5 blur-sm animate-led-pulse",
-                            product.accentColor === "blue"
-                              ? "bg-ef-blue"
-                              : "bg-ef-red"
-                          )}
-                        />
-                      )}
+                      <div className="w-32 h-20 rounded-sm bg-white/[0.03] border border-white/[0.06]" />
+                      {/* Subtle surface line */}
+                      <div className="absolute -bottom-px left-4 right-4 h-px bg-white/10" />
                     </div>
                   </div>
+
                   {/* Hover arrow */}
-                  <div className="absolute top-4 right-4 p-2 rounded-full glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-                    <ArrowUpRight size={14} className="text-ef-white" />
+                  <div className="absolute top-4 right-4 p-2 rounded-sm glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">
+                    <ArrowUpRight size={13} className="text-ef-white" />
                   </div>
                   {/* Category badge */}
                   <div className="absolute top-4 left-4">
-                    <LEDBadge
-                      label={product.category}
-                      color={product.accentColor}
-                    />
+                    <LEDBadge label={product.category} color={product.accentColor} />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-5">
-                  <h3 className="font-semibold text-ef-white text-base mb-1 group-hover:text-ef-blue transition-colors">
+                  <h3 className="font-medium text-ef-white text-sm mb-1.5 group-hover:text-ef-white/90 transition-colors leading-snug">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-ef-dim leading-relaxed mb-4 line-clamp-2">
+                  <p className="text-xs text-ef-dim leading-relaxed mb-4 line-clamp-2 font-light">
                     {product.description}
                   </p>
 
                   {/* Feature icons */}
                   <div className="flex items-center gap-3 pt-3 border-t border-ef-border">
                     {product.hasLED && (
-                      <div
-                        className={cn(
-                          "flex items-center gap-1 text-xs",
-                          product.accentColor === "blue"
-                            ? "text-ef-blue"
-                            : "text-ef-red"
-                        )}
-                      >
+                      <div className="flex items-center gap-1 text-xs text-ef-dim">
                         <Zap size={11} />
                         LED
                       </div>
@@ -124,7 +94,7 @@ export function FeaturedProducts() {
                       </div>
                     )}
                     <div className="ml-auto">
-                      <span className="text-xs text-ef-dim">
+                      <span className="text-xs text-ef-dim/60">
                         {product.colors.length} colores
                       </span>
                     </div>
@@ -136,19 +106,19 @@ export function FeaturedProducts() {
 
           {/* Ver todo card */}
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <Link
               href="/catalogo"
-              className="group flex flex-col items-center justify-center h-full min-h-[280px] glass glass-hover rounded-2xl border-dashed border-ef-border transition-all duration-300 hover:-translate-y-1"
+              className="group flex flex-col items-center justify-center h-full min-h-[280px] glass rounded-xl border-dashed transition-all duration-300 hover:-translate-y-1 hover:border-white/10"
             >
-              <div className="w-12 h-12 rounded-full border border-ef-border flex items-center justify-center mb-4 group-hover:border-ef-blue group-hover:text-ef-blue transition-colors">
-                <ArrowUpRight size={20} className="text-ef-dim group-hover:text-ef-blue" />
+              <div className="w-10 h-10 rounded-sm border border-ef-border flex items-center justify-center mb-4 group-hover:border-white/20 transition-colors">
+                <ArrowUpRight size={18} className="text-ef-dim group-hover:text-ef-white transition-colors" />
               </div>
-              <span className="text-sm font-medium text-ef-dim group-hover:text-ef-white transition-colors">
+              <span className="text-xs font-light text-ef-dim group-hover:text-ef-white transition-colors tracking-wide">
                 Ver catálogo completo
               </span>
             </Link>

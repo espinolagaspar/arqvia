@@ -40,11 +40,11 @@ export function Header() {
       <motion.header
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "glass-dark border-b border-white/5"
+            ? "bg-ef-black/90 backdrop-blur-md border-b border-white/[0.04]"
             : "bg-transparent"
         )}
       >
@@ -53,14 +53,13 @@ export function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
               <div className="flex items-center">
-                <span className="text-xl font-bold tracking-tight text-ef-white">
+                <span className="text-xl font-semibold tracking-tight text-ef-white">
                   ef
                 </span>
-                <span className="text-xl font-bold tracking-tight text-ef-blue">
+                <span className="text-xl font-light tracking-tight text-ef-dim">
                   studio
                 </span>
               </div>
-              <div className="w-1.5 h-1.5 rounded-full bg-ef-blue animate-led-pulse" />
             </Link>
 
             {/* Desktop Nav */}
@@ -70,17 +69,17 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "text-sm font-medium transition-colors duration-200 relative group",
+                    "text-sm transition-colors duration-200 relative",
                     pathname === link.href
-                      ? "text-ef-white"
-                      : "text-ef-dim hover:text-ef-white"
+                      ? "text-ef-white font-medium"
+                      : "text-ef-dim hover:text-ef-white font-normal"
                   )}
                 >
                   {link.label}
                   {pathname === link.href && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-px bg-ef-blue"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-ef-white/30"
                     />
                   )}
                 </Link>
@@ -91,9 +90,9 @@ export function Header() {
             <div className="flex items-center gap-3">
               <Link
                 href="/cotizacion"
-                className="hidden md:flex btn-primary text-sm py-2 px-4"
+                className="hidden md:flex btn-primary text-sm py-2 px-5"
               >
-                Cotizar ahora
+                Cotizar
               </Link>
 
               <button
@@ -115,24 +114,24 @@ export function Header() {
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed inset-0 z-40 bg-ef-black/98 flex flex-col pt-20 px-6"
+            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+            className="fixed inset-0 z-40 bg-ef-black flex flex-col pt-20 px-6"
           >
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-1">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
+                  transition={{ delay: i * 0.05, duration: 0.3 }}
                 >
                   <Link
                     href={link.href}
                     className={cn(
-                      "block py-4 text-2xl font-semibold border-b border-ef-border transition-colors",
+                      "block py-4 text-2xl font-light border-b border-ef-border transition-colors",
                       pathname === link.href
-                        ? "text-ef-blue"
-                        : "text-ef-white hover:text-ef-blue"
+                        ? "text-ef-white"
+                        : "text-ef-dim hover:text-ef-white"
                     )}
                   >
                     {link.label}
@@ -142,9 +141,9 @@ export function Header() {
             </nav>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
+              transition={{ delay: 0.3 }}
               className="mt-8"
             >
               <Link href="/cotizacion" className="btn-primary w-full justify-center">

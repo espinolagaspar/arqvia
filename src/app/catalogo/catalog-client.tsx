@@ -17,9 +17,17 @@ const categories: { value: FilterCategory; label: string }[] = [
   { value: "dormitorio", label: "Dormitorio" },
   { value: "living", label: "Living" },
   { value: "oficina", label: "Oficina" },
-  { value: "gamer", label: "Gamer" },
+  { value: "gamer", label: "Setup" },
   { value: "cocina", label: "Cocina" },
 ];
+
+const productTones: Record<string, string> = {
+  dormitorio: "from-[#111] to-[#0a0a0a]",
+  gamer:      "from-[#120a0a] to-[#0a0a0a]",
+  living:     "from-[#0a0a10] to-[#0a0a0a]",
+  oficina:    "from-[#0f0f0f] to-[#0a0a0a]",
+  cocina:     "from-[#10100e] to-[#0a0a0a]",
+};
 
 export function CatalogClient() {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("todos");
@@ -51,10 +59,10 @@ export function CatalogClient() {
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
                 className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                  "px-4 py-2 rounded-sm text-xs font-light tracking-wide transition-all duration-200",
                   activeCategory === cat.value
-                    ? "bg-ef-blue text-white shadow-lg"
-                    : "glass text-ef-dim hover:text-ef-white hover:border-ef-blue/20"
+                    ? "bg-ef-white text-ef-black font-medium"
+                    : "glass text-ef-dim hover:text-ef-white hover:border-white/10"
                 )}
               >
                 {cat.label}
@@ -65,13 +73,13 @@ export function CatalogClient() {
           <button
             onClick={() => setShowLEDOnly(!showLEDOnly)}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+              "flex items-center gap-2 px-4 py-2 rounded-sm text-xs font-light tracking-wide transition-all duration-200",
               showLEDOnly
-                ? "bg-ef-blue/20 text-ef-blue border border-ef-blue/30"
+                ? "bg-white/10 text-ef-white border border-white/20"
                 : "glass text-ef-dim hover:text-ef-white"
             )}
           >
-            <Zap size={14} />
+            <Zap size={12} />
             Solo con LED
           </button>
         </div>
@@ -80,11 +88,11 @@ export function CatalogClient() {
       {/* Grid */}
       <div className="container-ef py-12">
         <div className="flex items-center justify-between mb-6">
-          <span className="text-sm text-ef-dim">
+          <span className="text-xs text-ef-dim font-light">
             {filtered.length} producto{filtered.length !== 1 ? "s" : ""}
           </span>
-          <button className="flex items-center gap-2 text-sm text-ef-dim hover:text-ef-white transition-colors">
-            <SlidersHorizontal size={14} />
+          <button className="flex items-center gap-2 text-xs text-ef-dim hover:text-ef-white transition-colors font-light">
+            <SlidersHorizontal size={13} />
             Ordenar
           </button>
         </div>
@@ -92,89 +100,61 @@ export function CatalogClient() {
         <AnimatePresence mode="popLayout">
           <motion.div
             layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"
           >
             {filtered.map((product) => (
               <motion.div
                 key={product.id}
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.25 }}
               >
                 <Link
                   href={`/catalogo/${product.slug}`}
-                  className="group block glass glass-hover rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                  className="group block glass rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/10"
                 >
                   {/* Visual */}
                   <div className="relative h-44 overflow-hidden">
                     <div
                       className={cn(
-                        "absolute inset-0 bg-gradient-to-br transition-transform duration-500 group-hover:scale-105",
-                        product.gradient
+                        "absolute inset-0 bg-gradient-to-br transition-transform duration-500 group-hover:scale-[1.03]",
+                        productTones[product.category] ?? "from-[#111] to-[#0a0a0a]"
                       )}
                     />
-                    <div
-                      className={cn(
-                        "absolute bottom-0 left-0 right-0 h-12 blur-lg opacity-40 group-hover:opacity-60 transition-opacity",
-                        product.accentColor === "blue" ? "bg-ef-blue" : "bg-ef-red"
-                      )}
-                    />
-                    {/* LED strip simulation */}
-                    {product.hasLED && (
-                      <div className="absolute bottom-4 left-6 right-6 h-px">
-                        <div
-                          className={cn(
-                            "absolute inset-0 blur-sm animate-led-pulse",
-                            product.accentColor === "blue" ? "bg-ef-blue" : "bg-ef-red"
-                          )}
-                        />
-                      </div>
-                    )}
-                    <div className="absolute top-3 right-3 p-1.5 rounded-lg glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">
-                      <ArrowUpRight size={12} className="text-ef-white" />
+                    {/* Architectural lines */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                      <div className="absolute top-5 left-5 right-5 h-px bg-white/[0.05]" />
+                      <div className="absolute top-5 left-5 bottom-5 w-px bg-white/[0.05]" />
+                    </div>
+                    <div className="absolute top-3 right-3 p-1.5 rounded-sm glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">
+                      <ArrowUpRight size={11} className="text-ef-white" />
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="p-4">
                     <div className="flex items-center gap-2 mb-2">
-                      <LEDBadge
-                        label={product.category}
-                        color={product.accentColor}
-                      />
+                      <LEDBadge label={product.category} color={product.accentColor} />
                     </div>
-                    <h3 className="text-sm font-semibold text-ef-white mb-1 group-hover:text-ef-blue transition-colors leading-snug">
+                    <h3 className="text-xs font-medium text-ef-white mb-1 group-hover:text-ef-white/90 transition-colors leading-snug">
                       {product.name}
                     </h3>
-                    <p className="text-xs text-ef-dim leading-relaxed mb-3 line-clamp-2">
+                    <p className="text-[11px] text-ef-dim leading-relaxed mb-3 line-clamp-2 font-light">
                       {product.description}
                     </p>
 
                     {/* Icons row */}
-                    <div className="flex items-center gap-3 pt-3 border-t border-ef-border">
-                      {product.hasLED && (
-                        <Zap
-                          size={12}
-                          className={
-                            product.accentColor === "blue"
-                              ? "text-ef-blue"
-                              : "text-ef-red"
-                          }
-                        />
-                      )}
-                      {product.hasUSB && (
-                        <Usb size={12} className="text-ef-dim" />
-                      )}
-                      {product.hasWirelessCharging && (
-                        <Wifi size={12} className="text-ef-dim" />
-                      )}
+                    <div className="flex items-center gap-2.5 pt-3 border-t border-ef-border">
+                      {product.hasLED && <Zap size={11} className="text-ef-dim/60" />}
+                      {product.hasUSB && <Usb size={11} className="text-ef-dim/60" />}
+                      {product.hasWirelessCharging && <Wifi size={11} className="text-ef-dim/60" />}
                       <div className="ml-auto flex gap-1">
                         {product.colors.slice(0, 3).map((c) => (
                           <div
                             key={c.hex}
-                            className="w-3 h-3 rounded-full border border-white/10"
+                            className="w-2.5 h-2.5 rounded-full border border-white/10"
                             style={{ backgroundColor: c.hex }}
                             title={c.name}
                           />
@@ -190,10 +170,10 @@ export function CatalogClient() {
 
         {filtered.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <p className="text-ef-dim mb-4">No hay productos para este filtro.</p>
+            <p className="text-ef-dim mb-4 font-light text-sm">No hay productos para este filtro.</p>
             <button
               onClick={() => { setActiveCategory("todos"); setShowLEDOnly(false); }}
-              className="btn-secondary text-sm"
+              className="btn-secondary text-xs"
             >
               Limpiar filtros
             </button>

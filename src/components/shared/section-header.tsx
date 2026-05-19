@@ -22,16 +22,14 @@ export function SectionHeader({
   className,
   accentColor = "blue",
 }: SectionHeaderProps) {
-  const accentClass = accentColor === "blue" ? "text-ef-blue" : "text-ef-red";
-  const ledLineClass =
-    accentColor === "blue" ? "led-line" : "led-line-red";
+  void accentColor; // reserved — accent color kept neutral across the refactor
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
       className={cn(
         "mb-16",
         align === "center" ? "text-center" : "text-left",
@@ -41,35 +39,30 @@ export function SectionHeader({
       {eyebrow && (
         <div
           className={cn(
-            "flex items-center gap-3 mb-4",
+            "flex items-center gap-3 mb-5",
             align === "center" ? "justify-center" : "justify-start"
           )}
         >
-          <div className={cn("w-6 h-px", ledLineClass === "led-line" ? "bg-ef-blue" : "bg-ef-red")} />
-          <span
-            className={cn(
-              "text-xs font-medium tracking-widest uppercase",
-              accentClass
-            )}
-          >
+          <div className="w-5 h-px bg-ef-dim/30" />
+          <span className="text-xs font-normal tracking-[0.16em] uppercase text-ef-dim/70">
             {eyebrow}
           </span>
-          <div className={cn("w-6 h-px", ledLineClass === "led-line" ? "bg-ef-blue" : "bg-ef-red")} />
+          <div className="w-5 h-px bg-ef-dim/30" />
         </div>
       )}
 
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-ef-white">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-[-0.025em] text-ef-white leading-[1.1]">
         {title}
         {titleAccent && (
           <>
             {" "}
-            <span className={accentClass}>{titleAccent}</span>
+            <span className="font-semibold">{titleAccent}</span>
           </>
         )}
       </h2>
 
       {description && (
-        <p className="mt-4 text-base sm:text-lg text-ef-dim leading-relaxed max-w-2xl mx-auto">
+        <p className="mt-5 text-base sm:text-lg text-ef-dim leading-relaxed max-w-2xl mx-auto font-light">
           {description}
         </p>
       )}
