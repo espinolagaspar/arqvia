@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Check, MessageCircle, Zap, Wifi, Usb, Layers } from "lucide-react";
 import { LEDBadge } from "@/components/shared/led-badge";
 import { formatWhatsAppUrl } from "@/lib/utils";
@@ -35,60 +36,55 @@ export function ProductDetail({ product }: { product: Product }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div
-              className={cn(
-                "relative h-[450px] lg:h-[540px] rounded-3xl overflow-hidden",
+            <div className="relative h-[450px] lg:h-[540px] rounded-xl overflow-hidden">
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              ) : (
+                <div className={cn("absolute inset-0 bg-gradient-to-br", product.gradient)} />
               )}
-            >
-              <div className={cn("absolute inset-0 bg-gradient-to-br", product.gradient)} />
-              {/* LED glow */}
-              <div
-                className={cn(
-                  "absolute bottom-0 left-0 right-0 h-32 blur-2xl opacity-30 animate-led-pulse",
-                  product.accentColor === "blue" ? "bg-ef-blue" : "bg-ef-red"
-                )}
-              />
-              {/* Floating badge */}
-              <div className="absolute top-6 left-6">
+
+              {/* Overlay escuro sutil para legibilidade de badges */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+
+              {/* Badges */}
+              <div className="absolute top-5 left-5">
                 <LEDBadge label={product.category} color={product.accentColor} />
               </div>
               {product.isFloating && (
-                <div className="absolute top-6 right-6">
-                  <LEDBadge label="Flotante" color="blue" />
+                <div className="absolute top-5 right-5">
+                  <LEDBadge label="Flotante" />
                 </div>
               )}
-              {/* Center furniture visualization */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  <div className="w-48 h-28 rounded-xl bg-white/5 border border-white/10 shadow-2xl" />
-                  {product.hasLED && (
-                    <div
-                      className={cn(
-                        "absolute -bottom-1 left-4 right-4 h-0.5 blur-sm animate-led-pulse",
-                        product.accentColor === "blue" ? "bg-ef-blue" : "bg-ef-red"
-                      )}
-                    />
-                  )}
-                </div>
-              </div>
-              {/* Color swatch overlay */}
-              <div
-                className="absolute inset-0 opacity-5 transition-colors duration-500"
-                style={{ backgroundColor: selectedColor.hex }}
-              />
             </div>
 
-            {/* Thumbnail strip */}
-            <div className="flex gap-3 mt-4">
-              {[1, 2, 3].map((n) => (
+            {/* Thumbnail strip — muestra la imagen principal como referencia */}
+            <div className="flex gap-3 mt-3">
+              <div className="flex-1 h-20 rounded-lg overflow-hidden cursor-pointer border border-white/10">
+                {product.image ? (
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={200}
+                    height={80}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className={cn("w-full h-full bg-gradient-to-br", product.gradient)} />
+                )}
+              </div>
+              {[2, 3].map((n) => (
                 <div
                   key={n}
-                  className={cn(
-                    "flex-1 h-20 rounded-xl overflow-hidden cursor-pointer border transition-colors",
-                    n === 1 ? "border-ef-blue/40" : "border-ef-border hover:border-ef-border"
-                  )}
+                  className="flex-1 h-20 rounded-lg overflow-hidden cursor-pointer border border-ef-border"
                 >
-                  <div className={cn("w-full h-full bg-gradient-to-br opacity-80", product.gradient)} />
+                  <div className={cn("w-full h-full bg-gradient-to-br opacity-60", product.gradient)} />
                 </div>
               ))}
             </div>

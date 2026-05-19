@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Zap, Wifi, Usb, SlidersHorizontal } from "lucide-react";
 import { SectionHeader } from "@/components/shared/section-header";
 import { LEDBadge } from "@/components/shared/led-badge";
@@ -117,17 +118,29 @@ export function CatalogClient() {
                 >
                   {/* Visual */}
                   <div className="relative h-44 overflow-hidden">
-                    <div
-                      className={cn(
-                        "absolute inset-0 bg-gradient-to-br transition-transform duration-500 group-hover:scale-[1.03]",
-                        productTones[product.category] ?? "from-[#111] to-[#0a0a0a]"
-                      )}
-                    />
-                    {/* Architectural lines */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                      <div className="absolute top-5 left-5 right-5 h-px bg-white/[0.05]" />
-                      <div className="absolute top-5 left-5 bottom-5 w-px bg-white/[0.05]" />
-                    </div>
+                    {product.image ? (
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <div
+                        className={cn(
+                          "absolute inset-0 bg-gradient-to-br transition-transform duration-500 group-hover:scale-[1.03]",
+                          productTones[product.category] ?? "from-[#111] to-[#0a0a0a]"
+                        )}
+                      />
+                    )}
+                    {/* Architectural lines on non-image cards */}
+                    {!product.image && (
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                        <div className="absolute top-5 left-5 right-5 h-px bg-white/[0.05]" />
+                        <div className="absolute top-5 left-5 bottom-5 w-px bg-white/[0.05]" />
+                      </div>
+                    )}
                     <div className="absolute top-3 right-3 p-1.5 rounded-sm glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">
                       <ArrowUpRight size={11} className="text-ef-white" />
                     </div>

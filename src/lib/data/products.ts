@@ -136,6 +136,7 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-zinc-900 via-neutral-900 to-black",
     accentColor: "blue",
+    image: "/images/escritorio-home-office.png",
   },
   {
     id: "6",

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Zap, Wifi, Usb } from "lucide-react";
 import { SectionHeader } from "@/components/shared/section-header";
 import { LEDBadge } from "@/components/shared/led-badge";
@@ -41,18 +42,28 @@ export function FeaturedProducts() {
               >
                 {/* Visual */}
                 <div className="relative h-52 overflow-hidden">
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${categoryTones[product.category] ?? "from-[#111] to-[#0a0a0a]"}`}
-                  />
-
-                  {/* Architectural furniture silhouette */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative">
-                      <div className="w-32 h-20 rounded-sm bg-white/[0.03] border border-white/[0.06]" />
-                      {/* Subtle surface line */}
-                      <div className="absolute -bottom-px left-4 right-4 h-px bg-white/10" />
-                    </div>
-                  </div>
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <>
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${categoryTones[product.category] ?? "from-[#111] to-[#0a0a0a]"}`}
+                      />
+                      {/* Architectural furniture silhouette */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="relative">
+                          <div className="w-32 h-20 rounded-sm bg-white/[0.03] border border-white/[0.06]" />
+                          <div className="absolute -bottom-px left-4 right-4 h-px bg-white/10" />
+                        </div>
+                      </div>
+                    </>
+                  )}
 
                   {/* Hover arrow */}
                   <div className="absolute top-4 right-4 p-2 rounded-sm glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">

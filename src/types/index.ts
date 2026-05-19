@@ -13,6 +13,7 @@ export interface Product {
   slug: string;
   gradient: string;
   accentColor: "blue" | "red";
+  image?: string;
 }
 
 export interface ProductColor {
