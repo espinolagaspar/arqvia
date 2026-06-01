@@ -84,6 +84,7 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-blue-950 via-indigo-950 to-black",
     accentColor: "blue",
+    image: "/images/mueble-tv-flotante.png",
   },
   {
     id: "5",
