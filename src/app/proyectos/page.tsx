@@ -6,7 +6,7 @@ import { getProjects } from "@/lib/projects/store";
 export const dynamic = "force-dynamic";
 
 const stats = [
-  { value: "500+", label: "Proyectos realizados" },
+  { value: "100+", label: "Proyectos realizados" },
   { value: "5", label: "Años de experiencia" },
   { value: "CABA + GBA", label: "Zona de cobertura" },
   { value: "100%", label: "Fabricación propia" },

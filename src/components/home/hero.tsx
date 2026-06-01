@@ -117,7 +117,7 @@ export function Hero() {
             className="flex gap-10 mt-16 pt-8 border-t border-white/[0.06]"
           >
             {[
-              { value: "500+", label: "Proyectos realizados" },
+              { value: "100+", label: "Proyectos realizados" },
               { value: "5 años", label: "De experiencia" },
               { value: "100%", label: "Fabricación propia" },
             ].map((stat) => (
