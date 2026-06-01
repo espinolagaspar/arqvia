@@ -28,6 +28,7 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-blue-950 via-slate-900 to-black",
     accentColor: "blue",
+    image: "/images/mesa-luz-led-flotante.png",
   },
   {
     id: "2",
@@ -82,6 +83,7 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-slate-900 via-zinc-900 to-black",
     accentColor: "blue",
+    image: "/images/placard-moderno-led.png",
   },
   {
     id: "4",
@@ -164,6 +166,7 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-red-950 via-rose-950 to-black",
     accentColor: "red",
+    image: "/images/cama-tapizada-led.png",
   },
   {
     id: "7",
@@ -191,6 +194,7 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-slate-900 via-gray-900 to-black",
     accentColor: "blue",
+    image: "/images/biblioteca-modular.png",
   },
   {
     id: "8",
