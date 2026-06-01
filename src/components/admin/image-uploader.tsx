@@ -3,14 +3,30 @@
 import { useRef, useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Upload, Star, Trash2, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { upload } from "@vercel/blob/client";
 import {
-  uploadImagesAction,
+  Upload,
+  Star,
+  Trash2,
+  ArrowLeft,
+  ArrowRight,
+  Loader2,
+} from "lucide-react";
+import {
+  attachImagesAction,
   removeImageAction,
   setCoverAction,
   reorderImagesAction,
 } from "@/app/admin/actions";
 import type { ProjectImage } from "@/types";
+
+function sanitizeName(name: string): string {
+  return (name || "foto.jpg")
+    .toLowerCase()
+    .replace(/[^a-z0-9.]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+}
 
 export function ImageUploader({
   id,
@@ -24,21 +40,56 @@ export function ImageUploader({
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState<{ done: number; total: number } | null>(
+    null,
+  );
+  const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   const busy = uploading || pending;
 
-  async function handleFiles(files: FileList | null) {
-    if (!files || files.length === 0) return;
+  async function handleFiles(fileList: FileList | null) {
+    if (!fileList || fileList.length === 0) return;
+    const files = Array.from(fileList);
+    setError(null);
     setUploading(true);
-    try {
-      const formData = new FormData();
-      Array.from(files).forEach((file) => formData.append("files", file));
-      await uploadImagesAction(id, formData);
-      router.refresh();
-    } finally {
-      setUploading(false);
-      if (inputRef.current) inputRef.current.value = "";
+    setProgress({ done: 0, total: files.length });
+
+    const uploaded: ProjectImage[] = [];
+    const failed: string[] = [];
+
+    for (const file of files) {
+      try {
+        const blob = await upload(
+          `projects/${id}/${crypto.randomUUID()}-${sanitizeName(file.name)}`,
+          file,
+          {
+            access: "public",
+            handleUploadUrl: "/api/admin/upload",
+            clientPayload: id,
+            contentType: file.type || undefined,
+            multipart: file.size > 8 * 1024 * 1024,
+          },
+        );
+        uploaded.push({ url: blob.url, pathname: blob.pathname });
+      } catch (e) {
+        console.error("Error subiendo", file.name, e);
+        failed.push(file.name);
+      } finally {
+        setProgress((p) => (p ? { ...p, done: p.done + 1 } : p));
+      }
     }
+
+    if (uploaded.length > 0) {
+      await attachImagesAction(id, uploaded);
+      router.refresh();
+    }
+    if (failed.length > 0) {
+      setError(`No se pudieron subir: ${failed.join(", ")}`);
+    }
+
+    setUploading(false);
+    setProgress(null);
+    if (inputRef.current) inputRef.current.value = "";
   }
 
   function move(index: number, dir: -1 | 1) {
@@ -59,7 +110,7 @@ export function ImageUploader({
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
-          handleFiles(e.dataTransfer.files);
+          if (!busy) handleFiles(e.dataTransfer.files);
         }}
         className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-ef-border bg-white/[0.02] py-10 cursor-pointer hover:border-white/20 transition-colors"
       >
@@ -69,7 +120,11 @@ export function ImageUploader({
           <Upload size={20} className="text-ef-dim" />
         )}
         <span className="text-sm text-ef-dim font-light">
-          {busy ? "Subiendo…" : "Arrastrá fotos acá o hacé click para elegir"}
+          {uploading && progress
+            ? `Subiendo ${progress.done}/${progress.total}…`
+            : busy
+              ? "Procesando…"
+              : "Arrastrá fotos acá o hacé click para elegir"}
         </span>
         <input
           ref={inputRef}
@@ -81,6 +136,8 @@ export function ImageUploader({
           onChange={(e) => handleFiles(e.target.files)}
         />
       </label>
+
+      {error && <p className="mt-3 text-xs text-red-400">{error}</p>}
 
       {/* Grid de fotos */}
       {images.length > 0 && (

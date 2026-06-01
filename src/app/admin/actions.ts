@@ -13,11 +13,10 @@ import {
 import {
   getProjects,
   saveProjects,
-  uploadProjectImage,
   deleteProjectImages,
   isBlobConfigured,
 } from "@/lib/projects/store";
-import type { Project } from "@/types";
+import type { Project, ProjectImage } from "@/types";
 
 async function requireAuth(): Promise<void> {
   const store = await cookies();
@@ -141,22 +140,26 @@ export async function deleteProjectAction(id: string): Promise<void> {
 
 // ── Fotos ─────────────────────────────────────────────────────────────────────
 
-export async function uploadImagesAction(
+/**
+ * Registra en el manifest fotos que ya fueron subidas al Blob desde el cliente
+ * (client upload). No sube nada: solo agrega las referencias {url, pathname}.
+ */
+export async function attachImagesAction(
   id: string,
-  formData: FormData,
+  images: ProjectImage[],
 ): Promise<void> {
   await requireAuth();
-  const files = formData
-    .getAll("files")
-    .filter((f): f is File => f instanceof File && f.size > 0);
-  if (files.length === 0) return;
-
-  const uploaded = await Promise.all(
-    files.map((file) => uploadProjectImage(id, file)),
+  const clean = images.filter(
+    (im) =>
+      im &&
+      typeof im.url === "string" &&
+      typeof im.pathname === "string" &&
+      im.pathname.startsWith(`projects/${id}/`),
   );
+  if (clean.length === 0) return;
   await mutateProject(id, (p) => ({
     ...p,
-    images: [...p.images, ...uploaded],
+    images: [...p.images, ...clean],
   }));
 }
 

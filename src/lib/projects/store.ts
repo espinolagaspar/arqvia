@@ -1,6 +1,6 @@
 import "server-only";
 import { list, put, del } from "@vercel/blob";
-import type { Project, ProjectImage } from "@/types";
+import type { Project } from "@/types";
 import { SEED_PROJECTS } from "@/lib/data/projects";
 
 /**
@@ -56,31 +56,6 @@ export async function saveProjects(projects: Project[]): Promise<void> {
     allowOverwrite: true,
     contentType: "application/json",
   });
-}
-
-function sanitizeName(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9.]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 60);
-}
-
-/** Sube una foto al store y devuelve su URL pública + pathname. */
-export async function uploadProjectImage(
-  projectId: string,
-  file: File,
-): Promise<ProjectImage> {
-  const pathname = `projects/${projectId}/${crypto.randomUUID()}-${sanitizeName(
-    file.name || "foto.jpg",
-  )}`;
-  const blob = await put(pathname, file, {
-    access: "public",
-    token: token(),
-    addRandomSuffix: false,
-    contentType: file.type || undefined,
-  });
-  return { url: blob.url, pathname: blob.pathname };
 }
 
 /** Borra una o varias fotos del store. Ignora errores (foto ya inexistente). */

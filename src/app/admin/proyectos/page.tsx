@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Pencil, ImageOff, LogOut } from "lucide-react";
+import { Plus, Pencil, ImageOff } from "lucide-react";
 import { getProjects, isBlobConfigured } from "@/lib/projects/store";
-import { createProjectAction, logoutAction } from "@/app/admin/actions";
+import { createProjectAction } from "@/app/admin/actions";
 import { DeleteProjectButton } from "@/components/admin/delete-project-button";
 
 export const dynamic = "force-dynamic";
@@ -14,18 +14,7 @@ export default async function AdminProyectosPage() {
   return (
     <div className="container-ef py-12">
       {/* Header */}
-      <div className="flex items-center justify-between mb-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Proyectos</h1>
-        <form action={logoutAction}>
-          <button
-            type="submit"
-            className="flex items-center gap-1.5 text-xs text-ef-dim hover:text-ef-white transition-colors"
-          >
-            <LogOut size={13} />
-            Salir
-          </button>
-        </form>
-      </div>
+      <h1 className="text-2xl font-semibold tracking-tight mb-2">Proyectos</h1>
       <p className="text-sm text-ef-dim font-light mb-8">
         {projects.length} proyecto{projects.length !== 1 ? "s" : ""} · se ven en{" "}
         <Link href="/proyectos" className="underline hover:text-ef-white">
