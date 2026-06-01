@@ -1,6 +1,12 @@
 import type { Project } from "@/types";
 
-export const projects: Project[] = [
+/**
+ * Datos iniciales de proyectos. Se usan como fallback cuando todavía no hay
+ * un manifest cargado en Vercel Blob (ej: en desarrollo sin token configurado).
+ * Una vez que el admin guarda por primera vez, la fuente de verdad pasa a ser
+ * el `projects.json` del Blob. Ver `src/lib/projects/store.ts`.
+ */
+export const SEED_PROJECTS: Project[] = [
   {
     id: "1",
     title: "Suite Ejecutiva CABA",
@@ -9,9 +15,11 @@ export const projects: Project[] = [
     description:
       "Transformación completa de suite principal con placard a medida, cama tapizada con LED, mesitas flotantes con carga inalámbrica y espejo LED panorámico.",
     tags: ["LED", "Flotante", "Premium", "Carga inalámbrica"],
-    gradient: "from-blue-950 via-slate-900 to-black",
-    accentColor: "blue",
     year: "2024",
+    images: [],
+    coverIndex: 0,
+    accentColor: "blue",
+    gradient: "from-blue-950 via-slate-900 to-black",
   },
   {
     id: "2",
@@ -21,56 +29,38 @@ export const projects: Project[] = [
     description:
       "Estudio profesional con escritorio doble en L, biblioteca modular retroiluminada, rack técnico y gestión de cables profesional integrada.",
     tags: ["Home Office", "LED", "Modular", "USB-C Hub"],
-    gradient: "from-slate-900 via-zinc-900 to-black",
-    accentColor: "blue",
     year: "2024",
+    images: [],
+    coverIndex: 0,
+    accentColor: "blue",
+    gradient: "from-slate-900 via-zinc-900 to-black",
   },
   {
     id: "3",
-    title: "Setup Gaming Pro",
-    location: "Caballito, Buenos Aires",
-    category: "Gaming Room",
-    description:
-      "Setup gamer de alto rendimiento con escritorio en L, sistema LED RGB sincronizado, rack PC custom y acoustic panels perimetrales.",
-    tags: ["Gamer", "RGB", "Setup completo", "Streaming"],
-    gradient: "from-red-950 via-slate-900 to-black",
-    accentColor: "red",
-    year: "2024",
-  },
-  {
-    id: "4",
     title: "Living Minimalista",
     location: "San Isidro, Buenos Aires",
     category: "Living & Comedor",
     description:
       "Living contemporáneo con rack TV flotante, biblioteca arquitectónica de doble altura y mueble de entretenimiento con retroiluminación ambiental.",
     tags: ["Flotante", "Minimalista", "LED ambiental"],
-    gradient: "from-indigo-950 via-slate-900 to-black",
-    accentColor: "blue",
     year: "2023",
+    images: [],
+    coverIndex: 0,
+    accentColor: "blue",
+    gradient: "from-indigo-950 via-slate-900 to-black",
   },
   {
-    id: "5",
-    title: "Dormitorio Juvenil Gamer",
-    location: "Flores, Buenos Aires",
-    category: "Dormitorio Gamer",
-    description:
-      "Habitación juvenil completa con cama nido, escritorio gamer, placard con LED interior y panel de entretenimiento integrado.",
-    tags: ["Gamer", "Juvenil", "LED", "Multifunción"],
-    gradient: "from-red-950 via-rose-950 to-black",
-    accentColor: "red",
-    year: "2024",
-  },
-  {
-    id: "6",
+    id: "4",
     title: "Cocina Moderna Premium",
     location: "Puerto Madero, Buenos Aires",
     category: "Cocina",
     description:
-      "Cocina integral de diseño europeo con iluminación LED bajo mueble, electrodomésticos integrados y isla central con carga inalámbrica.",
+      "Cocina integral de diseño europeo con iluminación LED bajo mueble, electrodomésticos integrados e isla central con carga inalámbrica.",
     tags: ["Cocina", "LED bajo mueble", "Premium", "Isla"],
-    gradient: "from-zinc-900 via-neutral-900 to-black",
-    accentColor: "blue",
     year: "2023",
+    images: [],
+    coverIndex: 0,
+    accentColor: "blue",
+    gradient: "from-zinc-900 via-neutral-900 to-black",
   },
 ];

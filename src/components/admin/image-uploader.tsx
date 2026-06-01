@@ -1,0 +1,174 @@
+"use client";
+
+import { useRef, useState, useTransition } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Upload, Star, Trash2, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import {
+  uploadImagesAction,
+  removeImageAction,
+  setCoverAction,
+  reorderImagesAction,
+} from "@/app/admin/actions";
+import type { ProjectImage } from "@/types";
+
+export function ImageUploader({
+  id,
+  images,
+  coverIndex,
+}: {
+  id: string;
+  images: ProjectImage[];
+  coverIndex: number;
+}) {
+  const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [pending, startTransition] = useTransition();
+  const busy = uploading || pending;
+
+  async function handleFiles(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      Array.from(files).forEach((file) => formData.append("files", file));
+      await uploadImagesAction(id, formData);
+      router.refresh();
+    } finally {
+      setUploading(false);
+      if (inputRef.current) inputRef.current.value = "";
+    }
+  }
+
+  function move(index: number, dir: -1 | 1) {
+    const target = index + dir;
+    if (target < 0 || target >= images.length) return;
+    const order = images.map((im) => im.pathname);
+    [order[index], order[target]] = [order[target], order[index]];
+    startTransition(async () => {
+      await reorderImagesAction(id, order);
+      router.refresh();
+    });
+  }
+
+  return (
+    <div>
+      {/* Dropzone / botón */}
+      <label
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => {
+          e.preventDefault();
+          handleFiles(e.dataTransfer.files);
+        }}
+        className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-ef-border bg-white/[0.02] py-10 cursor-pointer hover:border-white/20 transition-colors"
+      >
+        {busy ? (
+          <Loader2 size={20} className="text-ef-dim animate-spin" />
+        ) : (
+          <Upload size={20} className="text-ef-dim" />
+        )}
+        <span className="text-sm text-ef-dim font-light">
+          {busy ? "Subiendo…" : "Arrastrá fotos acá o hacé click para elegir"}
+        </span>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          multiple
+          className="hidden"
+          disabled={busy}
+          onChange={(e) => handleFiles(e.target.files)}
+        />
+      </label>
+
+      {/* Grid de fotos */}
+      {images.length > 0 && (
+        <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {images.map((img, i) => {
+            const isCover = i === coverIndex;
+            return (
+              <div
+                key={img.pathname}
+                className="group relative rounded-lg overflow-hidden border border-ef-border"
+              >
+                <div className="relative aspect-[4/3] bg-white/[0.04]">
+                  <Image
+                    src={img.url}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 50vw, 33vw"
+                  />
+                </div>
+
+                {isCover && (
+                  <span className="absolute top-2 left-2 flex items-center gap-1 rounded-sm bg-ef-white text-ef-black text-[10px] font-medium px-2 py-0.5">
+                    <Star size={10} className="fill-current" />
+                    Portada
+                  </span>
+                )}
+
+                {/* Controles */}
+                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-1 bg-gradient-to-t from-black/80 to-transparent p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex gap-1">
+                    <button
+                      type="button"
+                      title="Mover izquierda"
+                      disabled={busy || i === 0}
+                      onClick={() => move(i, -1)}
+                      className="p-1 rounded-sm bg-white/10 text-ef-white hover:bg-white/20 disabled:opacity-30"
+                    >
+                      <ArrowLeft size={12} />
+                    </button>
+                    <button
+                      type="button"
+                      title="Mover derecha"
+                      disabled={busy || i === images.length - 1}
+                      onClick={() => move(i, 1)}
+                      className="p-1 rounded-sm bg-white/10 text-ef-white hover:bg-white/20 disabled:opacity-30"
+                    >
+                      <ArrowRight size={12} />
+                    </button>
+                  </div>
+                  <div className="flex gap-1">
+                    {!isCover && (
+                      <button
+                        type="button"
+                        title="Marcar como portada"
+                        disabled={busy}
+                        onClick={() =>
+                          startTransition(async () => {
+                            await setCoverAction(id, i);
+                            router.refresh();
+                          })
+                        }
+                        className="p-1 rounded-sm bg-white/10 text-ef-white hover:bg-white/20 disabled:opacity-30"
+                      >
+                        <Star size={12} />
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      title="Eliminar foto"
+                      disabled={busy}
+                      onClick={() =>
+                        startTransition(async () => {
+                          await removeImageAction(id, img.pathname);
+                          router.refresh();
+                        })
+                      }
+                      className="p-1 rounded-sm bg-white/10 text-ef-white hover:bg-red-500/80 disabled:opacity-30"
+                    >
+                      <Trash2 size={12} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}

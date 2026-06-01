@@ -27,6 +27,13 @@ export type ProductCategory =
   | "oficina"
   | "cocina";
 
+export interface ProjectImage {
+  /** Public CDN URL del archivo en Vercel Blob */
+  url: string;
+  /** pathname dentro del blob store, necesario para borrarlo */
+  pathname: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -34,9 +41,14 @@ export interface Project {
   category: string;
   description: string;
   tags: string[];
-  gradient: string;
-  accentColor: "blue" | "red";
   year: string;
+  /** Carrusel de fotos. Vacío = se usa el gradiente de fallback. */
+  images: ProjectImage[];
+  /** Índice dentro de images[] que se usa como portada. */
+  coverIndex: number;
+  accentColor: "blue" | "red";
+  /** Fallback visual cuando todavía no hay fotos cargadas. */
+  gradient?: string;
 }
 
 export interface Differential {
