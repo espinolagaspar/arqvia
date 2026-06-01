@@ -1,15 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle, Mail, Camera, MapPin, Clock, Phone } from "lucide-react";
+import { MessageCircle, Mail, Camera, MapPin, Clock } from "lucide-react";
 import { formatWhatsAppUrl } from "@/lib/utils";
 
 const contactChannels = [
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    value: "+54 9 11 0000-0000",
-    description: "Respuesta inmediata en horario hábil",
+    value: "+54 9 11 3236-8891",
+    description: "",
     action: formatWhatsAppUrl("Hola efstudio! Quiero hacer una consulta."),
     isGreen: true,
   },
@@ -24,9 +24,9 @@ const contactChannels = [
   {
     icon: Mail,
     label: "Email",
-    value: "hola@efstudio.com.ar",
+    value: "efstudio.service@gmail.com",
     description: "Para consultas formales o presupuestos detallados",
-    action: "mailto:hola@efstudio.com.ar",
+    action: "mailto:efstudio.service@gmail.com",
     isGreen: false,
   },
 ];
@@ -41,11 +41,6 @@ const info = [
     icon: Clock,
     label: "Horarios de atención",
     value: "Lun–Vie 9:00–19:00 · Sáb 9:00–13:00",
-  },
-  {
-    icon: Phone,
-    label: "Visitas al taller",
-    value: "Con turno previo",
   },
 ];
 
@@ -108,9 +103,11 @@ export default function ContactoPage() {
                     <div className="text-sm font-medium text-ef-white leading-snug">
                       {channel.value}
                     </div>
-                    <div className="text-xs text-ef-dim mt-0.5 font-light">
-                      {channel.description}
-                    </div>
+                    {channel.description && (
+                      <div className="text-xs text-ef-dim mt-0.5 font-light">
+                        {channel.description}
+                      </div>
+                    )}
                   </div>
                   <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="w-5 h-5 rounded-sm border border-ef-border flex items-center justify-center">

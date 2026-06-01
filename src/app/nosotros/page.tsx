@@ -80,8 +80,8 @@ export default function NosotrosPage() {
               <span className="font-semibold">Tecnología.</span>
             </h1>
             <p className="text-lg text-ef-dim leading-relaxed max-w-2xl font-light">
-              Nació de una obsesión compartida: un arquitecto y un analista de
-              sistemas que no encontraban muebles a la altura de sus espacios.
+              Nació de una obsesión compartida: un arquitecto y un ingeniero de
+              software que no encontraban muebles a la altura de sus espacios.
               Así que los fabricamos nosotros.
             </p>
           </motion.div>
@@ -173,7 +173,7 @@ export default function NosotrosPage() {
             },
             {
               letter: "T",
-              role: "Analista de Sistemas · Director de Tecnología",
+              role: "Software Engineering · Tech",
               description:
                 "Background en desarrollo de software y sistemas embebidos. Responsable de integrar la tecnología dentro del mobiliario de forma invisible y elegante.",
             },

@@ -49,14 +49,14 @@ export function Footer() {
                 <Camera size={15} />
               </a>
               <a
-                href="mailto:hola@efstudio.com.ar"
+                href="mailto:efstudio.service@gmail.com"
                 className="p-2.5 glass rounded-sm text-ef-dim hover:text-ef-white hover:border-white/10 transition-colors"
                 aria-label="Email"
               >
                 <Mail size={15} />
               </a>
               <a
-                href="https://wa.me/5491100000000"
+                href="https://wa.me/5491132368891"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 glass rounded-sm text-ef-dim hover:text-ef-white hover:border-white/10 transition-colors"
