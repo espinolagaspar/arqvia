@@ -170,6 +170,35 @@ export const products: Product[] = [
     accentColor: "blue",
     image: "/images/biblioteca-modular.png",
   },
+  {
+    id: "9",
+    slug: "cocina-modular-led",
+    name: "Cocina Modular con LED",
+    category: "cocina",
+    description:
+      "Cocina modular de melamina premium con frentes sin tiradores, iluminación LED bajo alacenas y zócalo, mesada de aspecto microcemento y electrodomésticos integrados.",
+    features: [
+      "Iluminación LED bajo alacena y zócalo",
+      "Frentes sin tiradores (push to open)",
+      "Mesada aspecto microcemento",
+      "Electrodomésticos integrados",
+      "Herrajes europeos soft-close",
+      "Melamina importada premium",
+    ],
+    colors: [
+      { name: "Negro Mate", hex: "#1A1A1A" },
+      { name: "Grafito", hex: "#2D2D2D" },
+      { name: "Blanco Hueso", hex: "#F2F0EB" },
+    ],
+    hasLED: true,
+    hasUSB: false,
+    hasWirelessCharging: false,
+    isFloating: false,
+    priceRange: "Consultar",
+    gradient: "from-zinc-900 via-neutral-900 to-black",
+    accentColor: "blue",
+    image: "/images/cocina-modular-led.png",
+  },
 ];
 
 export const getProductsByCategory = (category: string) =>
