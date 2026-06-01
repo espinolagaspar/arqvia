@@ -124,6 +124,8 @@ export async function updateProjectAction(
     tags,
     accentColor: accent === "red" ? "red" : "blue",
   }));
+
+  redirect("/admin/proyectos");
 }
 
 export async function deleteProjectAction(id: string): Promise<void> {
