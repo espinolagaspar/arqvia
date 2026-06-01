@@ -4,13 +4,20 @@ import { useTransition } from "react";
 import { Trash2 } from "lucide-react";
 import { deleteProjectAction } from "@/app/admin/actions";
 
-export function DeleteProjectButton({ id }: { id: string }) {
+export function DeleteProjectButton({
+  id,
+  disabled,
+}: {
+  id: string;
+  disabled?: boolean;
+}) {
   const [pending, startTransition] = useTransition();
 
   return (
     <button
       type="button"
-      disabled={pending}
+      disabled={pending || disabled}
+      title={disabled ? "Configurá Vercel Blob para poder editar" : undefined}
       onClick={() => {
         if (
           confirm(

@@ -9,6 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminProyectosPage() {
   const projects = await getProjects();
+  const configured = isBlobConfigured();
 
   return (
     <div className="container-ef py-12">
@@ -32,11 +33,13 @@ export default async function AdminProyectosPage() {
         </Link>
       </p>
 
-      {!isBlobConfigured() && (
+      {!configured && (
         <div className="mb-6 rounded-lg border border-yellow-500/20 bg-yellow-500/[0.06] p-4 text-xs text-yellow-200/80 font-light">
           Vercel Blob todavía no está configurado (falta{" "}
-          <code className="text-yellow-100">BLOB_READ_WRITE_TOKEN</code>). Estás
-          viendo los datos de ejemplo y los cambios no se van a guardar.
+          <code className="text-yellow-100">BLOB_READ_WRITE_TOKEN</code>). Estos
+          son datos de ejemplo: <strong>no se pueden crear, editar ni
+          eliminar</strong> hasta que conectes el Blob store y agregues la
+          variable.
         </div>
       )}
 
@@ -44,7 +47,9 @@ export default async function AdminProyectosPage() {
       <form action={createProjectAction} className="mb-6">
         <button
           type="submit"
-          className="btn-primary inline-flex items-center gap-2"
+          disabled={!configured}
+          title={configured ? undefined : "Configurá Vercel Blob para crear proyectos"}
+          className="btn-primary inline-flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <Plus size={16} />
           Nuevo proyecto
@@ -92,14 +97,24 @@ export default async function AdminProyectosPage() {
               </div>
 
               <div className="flex items-center gap-4 flex-shrink-0">
-                <Link
-                  href={`/admin/proyectos/${project.id}/edit`}
-                  className="flex items-center gap-1.5 text-xs text-ef-dim hover:text-ef-white transition-colors"
-                >
-                  <Pencil size={13} />
-                  Editar
-                </Link>
-                <DeleteProjectButton id={project.id} />
+                {configured ? (
+                  <Link
+                    href={`/admin/proyectos/${project.id}/edit`}
+                    className="flex items-center gap-1.5 text-xs text-ef-dim hover:text-ef-white transition-colors"
+                  >
+                    <Pencil size={13} />
+                    Editar
+                  </Link>
+                ) : (
+                  <span
+                    title="Configurá Vercel Blob para editar"
+                    className="flex items-center gap-1.5 text-xs text-ef-dim/30 cursor-not-allowed"
+                  >
+                    <Pencil size={13} />
+                    Editar
+                  </span>
+                )}
+                <DeleteProjectButton id={project.id} disabled={!configured} />
               </div>
             </div>
           );
