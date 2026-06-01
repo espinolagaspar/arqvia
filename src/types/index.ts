@@ -25,7 +25,6 @@ export type ProductCategory =
   | "dormitorio"
   | "living"
   | "oficina"
-  | "gamer"
   | "cocina";
 
 export interface Project {

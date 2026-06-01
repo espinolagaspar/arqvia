@@ -18,13 +18,11 @@ const categories: { value: FilterCategory; label: string }[] = [
   { value: "dormitorio", label: "Dormitorio" },
   { value: "living", label: "Living" },
   { value: "oficina", label: "Oficina" },
-  { value: "gamer", label: "Setup" },
   { value: "cocina", label: "Cocina" },
 ];
 
 const productTones: Record<string, string> = {
   dormitorio: "from-[#111] to-[#0a0a0a]",
-  gamer:      "from-[#120a0a] to-[#0a0a0a]",
   living:     "from-[#0a0a10] to-[#0a0a0a]",
   oficina:    "from-[#0f0f0f] to-[#0a0a0a]",
   cocina:     "from-[#10100e] to-[#0a0a0a]",

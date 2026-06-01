@@ -31,33 +31,6 @@ export const products: Product[] = [
     image: "/images/mesa-luz-led-flotante.png",
   },
   {
-    id: "2",
-    slug: "escritorio-gamer-pro",
-    name: "Escritorio Gamer PRO",
-    category: "gamer",
-    description:
-      "Escritorio premium para setups gamer de alto nivel. Diseño en L con gestión de cables integrada, LED underglow y soporte para triple monitor.",
-    features: [
-      "LED underglow RGB",
-      "Gestión de cables integrada",
-      "Soporte para triple monitor",
-      "Hub USB 4 puertos",
-      "Carga inalámbrica",
-      "Superficie antirayones",
-    ],
-    colors: [
-      { name: "Negro Carbono", hex: "#111111" },
-      { name: "Grafito", hex: "#222222" },
-    ],
-    hasLED: true,
-    hasUSB: true,
-    hasWirelessCharging: true,
-    isFloating: false,
-    priceRange: "Consultar",
-    gradient: "from-red-950 via-slate-900 to-black",
-    accentColor: "red",
-  },
-  {
     id: "3",
     slug: "placard-moderno-led",
     name: "Placard Moderno con LED",
@@ -195,33 +168,6 @@ export const products: Product[] = [
     gradient: "from-slate-900 via-gray-900 to-black",
     accentColor: "blue",
     image: "/images/biblioteca-modular.png",
-  },
-  {
-    id: "8",
-    slug: "setup-gamer-completo",
-    name: "Setup Gamer Completo",
-    category: "gamer",
-    description:
-      "Setup gamer completo: escritorio en L, rack PC, estantería LED, organizador de periféricos y panel de control centralizado.",
-    features: [
-      "Escritorio en L 200cm",
-      "Rack PC con ventilación",
-      "LED sincronizado por ambiente",
-      "Panel de control central",
-      "Gestión de cables profesional",
-      "Soporte headset magnético",
-    ],
-    colors: [
-      { name: "Negro Carbono", hex: "#0D0D0D" },
-      { name: "Negro Rojo", hex: "#1A0000" },
-    ],
-    hasLED: true,
-    hasUSB: true,
-    hasWirelessCharging: true,
-    isFloating: false,
-    priceRange: "Consultar",
-    gradient: "from-red-950 via-orange-950 to-black",
-    accentColor: "red",
   },
 ];
 

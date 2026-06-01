@@ -14,7 +14,6 @@ const footerLinks = {
     { href: "/catalogo?cat=dormitorio", label: "Dormitorio" },
     { href: "/catalogo?cat=living", label: "Living" },
     { href: "/catalogo?cat=oficina", label: "Oficina" },
-    { href: "/catalogo?cat=gamer", label: "Setup" },
     { href: "/catalogo?cat=cocina", label: "Cocina" },
   ],
 };

@@ -10,7 +10,6 @@ import { featuredProducts } from "@/lib/data/products";
 
 const categoryTones: Record<string, string> = {
   dormitorio: "from-[#111] via-[#0f0f0f] to-[#0a0a0a]",
-  gamer:      "from-[#120a0a] via-[#0f0f0f] to-[#0a0a0a]",
   living:     "from-[#0a0a10] via-[#0f0f0f] to-[#0a0a0a]",
   oficina:    "from-[#0f0f0f] via-[#111] to-[#0a0a0a]",
   cocina:     "from-[#10100e] via-[#0f0f0f] to-[#0a0a0a]",
