@@ -12,6 +12,10 @@ import { cn } from "@/lib/utils";
 
 export function ProductDetail({ product }: { product: Product }) {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [activeImage, setActiveImage] = useState(product.coverIndex || 0);
+
+  const images = product.images;
+  const current = images[activeImage] ?? images[0] ?? null;
 
   const whatsappMsg = `Hola efstudio! Me interesa el producto "${product.name}". ¿Pueden darme más información?`;
 
@@ -37,9 +41,10 @@ export function ProductDetail({ product }: { product: Product }) {
             transition={{ duration: 0.6 }}
           >
             <div className="relative h-[450px] lg:h-[540px] rounded-xl overflow-hidden">
-              {product.image ? (
+              {current ? (
                 <Image
-                  src={product.image}
+                  key={current.pathname || current.url}
+                  src={current.url}
                   alt={product.name}
                   fill
                   priority
@@ -47,10 +52,15 @@ export function ProductDetail({ product }: { product: Product }) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               ) : (
-                <div className={cn("absolute inset-0 bg-gradient-to-br", product.gradient)} />
+                <div
+                  className={cn(
+                    "absolute inset-0 bg-gradient-to-br",
+                    product.gradient ?? "from-[#111] to-[#0a0a0a]",
+                  )}
+                />
               )}
 
-              {/* Overlay escuro sutil para legibilidade de badges */}
+              {/* Overlay sutil para legibilidad de badges */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
 
               {/* Badges */}
@@ -64,30 +74,32 @@ export function ProductDetail({ product }: { product: Product }) {
               )}
             </div>
 
-            {/* Thumbnail strip — muestra la imagen principal como referencia */}
-            <div className="flex gap-3 mt-3">
-              <div className="flex-1 h-20 rounded-lg overflow-hidden cursor-pointer border border-white/10">
-                {product.image ? (
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={200}
-                    height={80}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className={cn("w-full h-full bg-gradient-to-br", product.gradient)} />
-                )}
+            {/* Thumbnails */}
+            {images.length > 1 && (
+              <div className="flex flex-wrap gap-3 mt-3">
+                {images.map((img, i) => (
+                  <button
+                    key={img.pathname || img.url}
+                    type="button"
+                    onClick={() => setActiveImage(i)}
+                    className={cn(
+                      "relative w-20 h-20 rounded-lg overflow-hidden border transition-colors",
+                      i === activeImage
+                        ? "border-white/40"
+                        : "border-ef-border hover:border-white/20",
+                    )}
+                  >
+                    <Image
+                      src={img.url}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="80px"
+                    />
+                  </button>
+                ))}
               </div>
-              {[2, 3].map((n) => (
-                <div
-                  key={n}
-                  className="flex-1 h-20 rounded-lg overflow-hidden cursor-pointer border border-ef-border"
-                >
-                  <div className={cn("w-full h-full bg-gradient-to-br opacity-60", product.gradient)} />
-                </div>
-              ))}
-            </div>
+            )}
           </motion.div>
 
           {/* Info */}
@@ -134,45 +146,51 @@ export function ProductDetail({ product }: { product: Product }) {
             </div>
 
             {/* Color selection */}
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-medium text-ef-dim uppercase tracking-wider">
-                  Color
-                </span>
-                <span className="text-xs text-ef-white">{selectedColor.name}</span>
+            {product.colors.length > 0 && (
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-medium text-ef-dim uppercase tracking-wider">
+                    Color
+                  </span>
+                  <span className="text-xs text-ef-white">
+                    {selectedColor?.name}
+                  </span>
+                </div>
+                <div className="flex gap-3">
+                  {product.colors.map((color) => (
+                    <button
+                      key={color.hex}
+                      onClick={() => setSelectedColor(color)}
+                      className={cn(
+                        "relative w-10 h-10 rounded-full border-2 transition-all",
+                        selectedColor?.hex === color.hex
+                          ? product.accentColor === "blue"
+                            ? "border-ef-blue scale-110"
+                            : "border-ef-red scale-110"
+                          : "border-transparent hover:scale-105",
+                      )}
+                      style={{ backgroundColor: color.hex }}
+                      title={color.name}
+                    >
+                      {selectedColor?.hex === color.hex && (
+                        <span className="absolute inset-0 flex items-center justify-center">
+                          <Check
+                            size={14}
+                            className={
+                              color.hex === "#FFFFFF" ||
+                              color.hex === "#F0F0F0" ||
+                              color.hex === "#FAFAFA"
+                                ? "text-black"
+                                : "text-white"
+                            }
+                          />
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="flex gap-3">
-                {product.colors.map((color) => (
-                  <button
-                    key={color.hex}
-                    onClick={() => setSelectedColor(color)}
-                    className={cn(
-                      "relative w-10 h-10 rounded-full border-2 transition-all",
-                      selectedColor.hex === color.hex
-                        ? product.accentColor === "blue"
-                          ? "border-ef-blue scale-110"
-                          : "border-ef-red scale-110"
-                        : "border-transparent hover:scale-105"
-                    )}
-                    style={{ backgroundColor: color.hex }}
-                    title={color.name}
-                  >
-                    {selectedColor.hex === color.hex && (
-                      <span className="absolute inset-0 flex items-center justify-center">
-                        <Check
-                          size={14}
-                          className={
-                            color.hex === "#FFFFFF" || color.hex === "#F0F0F0" || color.hex === "#FAFAFA"
-                              ? "text-black"
-                              : "text-white"
-                          }
-                        />
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
+            )}
 
             {/* Features */}
             <div>

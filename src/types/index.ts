@@ -11,9 +11,13 @@ export interface Product {
   isFloating: boolean;
   priceRange: string;
   slug: string;
-  gradient: string;
   accentColor: "blue" | "red";
-  image?: string;
+  /** Carrusel de fotos. Vacío = se usa el gradiente de fallback. */
+  images: ProjectImage[];
+  /** Índice dentro de images[] que se usa como portada. */
+  coverIndex: number;
+  /** Fallback visual cuando no hay fotos. */
+  gradient?: string;
 }
 
 export interface ProductColor {

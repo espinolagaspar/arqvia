@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { CatalogClient } from "./catalog-client";
+import { getProducts } from "@/lib/products/store";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Catálogo",
   description:
-    "Explorá el catálogo completo de muebles modernos de efstudio. Dormitorio, living, oficina, gamer y más con LED, USB y carga inalámbrica.",
+    "Explorá el catálogo completo de muebles modernos de efstudio. Dormitorio, living, oficina y cocina con LED, USB y carga inalámbrica.",
 };
 
-export default function CatalogoPage() {
-  return <CatalogClient />;
+export default async function CatalogoPage() {
+  const products = await getProducts();
+  return <CatalogClient products={products} />;
 }

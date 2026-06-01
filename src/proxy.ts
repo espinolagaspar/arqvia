@@ -10,7 +10,7 @@ import { SESSION_COOKIE, verifySession } from "@/lib/auth";
  * de auth se repite además dentro de cada Server Action (defensa en profundidad).
  */
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin", "/admin/:path*"],
 };
 
 export async function proxy(request: NextRequest) {

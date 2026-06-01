@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ArrowUpRight, Zap, Wifi, Usb } from "lucide-react";
 import { SectionHeader } from "@/components/shared/section-header";
 import { LEDBadge } from "@/components/shared/led-badge";
-import { featuredProducts } from "@/lib/data/products";
+import type { Product } from "@/types";
 
 const categoryTones: Record<string, string> = {
   dormitorio: "from-[#111] via-[#0f0f0f] to-[#0a0a0a]",
@@ -15,7 +15,7 @@ const categoryTones: Record<string, string> = {
   cocina:     "from-[#10100e] via-[#0f0f0f] to-[#0a0a0a]",
 };
 
-export function FeaturedProducts() {
+export function FeaturedProducts({ products }: { products: Product[] }) {
   return (
     <section className="section-padding bg-ef-black">
       <div className="container-ef">
@@ -27,7 +27,10 @@ export function FeaturedProducts() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featuredProducts.map((product, i) => (
+          {products.map((product, i) => {
+            const cover =
+              product.images[product.coverIndex] ?? product.images[0] ?? null;
+            return (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 24 }}
@@ -41,9 +44,9 @@ export function FeaturedProducts() {
               >
                 {/* Visual */}
                 <div className="relative h-52 overflow-hidden">
-                  {product.image ? (
+                  {cover ? (
                     <Image
-                      src={product.image}
+                      src={cover.url}
                       alt={product.name}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -112,7 +115,8 @@ export function FeaturedProducts() {
                 </div>
               </Link>
             </motion.div>
-          ))}
+            );
+          })}
 
           {/* Ver todo card */}
           <motion.div

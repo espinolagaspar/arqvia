@@ -6,17 +6,33 @@ export function AdminHeader() {
   return (
     <header className="border-b border-ef-border sticky top-0 z-40 bg-ef-black/90 backdrop-blur-sm">
       <div className="container-ef flex items-center justify-between py-4">
-        <Link href="/admin/proyectos" className="flex items-center gap-1.5">
-          <span className="text-lg font-semibold tracking-tight text-ef-white">
-            ef
-          </span>
-          <span className="text-lg font-light tracking-tight text-ef-dim">
-            studio
-          </span>
-          <span className="ml-2 text-[10px] uppercase tracking-[0.15em] text-ef-dim/50">
-            admin
-          </span>
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link href="/admin" className="flex items-center gap-1.5">
+            <span className="text-lg font-semibold tracking-tight text-ef-white">
+              ef
+            </span>
+            <span className="text-lg font-light tracking-tight text-ef-dim">
+              studio
+            </span>
+            <span className="ml-2 text-[10px] uppercase tracking-[0.15em] text-ef-dim/50">
+              admin
+            </span>
+          </Link>
+          <nav className="hidden sm:flex items-center gap-4">
+            <Link
+              href="/admin/proyectos"
+              className="text-xs text-ef-dim hover:text-ef-white transition-colors"
+            >
+              Proyectos
+            </Link>
+            <Link
+              href="/admin/productos"
+              className="text-xs text-ef-dim hover:text-ef-white transition-colors"
+            >
+              Catálogo
+            </Link>
+          </nav>
+        </div>
 
         <div className="flex items-center gap-5">
           <Link

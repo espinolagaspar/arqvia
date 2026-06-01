@@ -1,6 +1,14 @@
 import type { Product } from "@/types";
 
-export const products: Product[] = [
+/**
+ * Datos iniciales del catálogo. Fallback cuando todavía no hay manifest en
+ * Vercel Blob. Una vez que el admin guarda, la fuente de verdad pasa a ser el
+ * `products.json` del Blob. Ver `src/lib/products/store.ts`.
+ *
+ * Las imágenes del seed apuntan a archivos locales en /public/images (pathname
+ * vacío = no viven en Blob, así que el admin no intenta borrarlas del store).
+ */
+export const SEED_PRODUCTS: Product[] = [
   {
     id: "1",
     slug: "mesa-luz-led-flotante",
@@ -28,7 +36,8 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-blue-950 via-slate-900 to-black",
     accentColor: "blue",
-    image: "/images/mesa-luz-led-flotante.png",
+    images: [{ url: "/images/mesa-luz-led-flotante.png", pathname: "" }],
+    coverIndex: 0,
   },
   {
     id: "3",
@@ -56,7 +65,8 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-slate-900 via-zinc-900 to-black",
     accentColor: "blue",
-    image: "/images/placard-moderno-led.png",
+    images: [{ url: "/images/placard-moderno-led.png", pathname: "" }],
+    coverIndex: 0,
   },
   {
     id: "4",
@@ -71,7 +81,7 @@ export const products: Product[] = [
       "Paneles texturizados 3D",
       "Gestión de cables oculta",
       "Cajones con soft-close",
-      "Compatible hasta 85\"",
+      'Compatible hasta 85"',
     ],
     colors: [
       { name: "Negro Grafito", hex: "#141414" },
@@ -84,7 +94,8 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-blue-950 via-indigo-950 to-black",
     accentColor: "blue",
-    image: "/images/mueble-tv-flotante.png",
+    images: [{ url: "/images/mueble-tv-flotante.png", pathname: "" }],
+    coverIndex: 0,
   },
   {
     id: "5",
@@ -112,7 +123,8 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-zinc-900 via-neutral-900 to-black",
     accentColor: "blue",
-    image: "/images/escritorio-home-office.png",
+    images: [{ url: "/images/escritorio-home-office.png", pathname: "" }],
+    coverIndex: 0,
   },
   {
     id: "6",
@@ -140,7 +152,8 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-red-950 via-rose-950 to-black",
     accentColor: "red",
-    image: "/images/cama-tapizada-led.png",
+    images: [{ url: "/images/cama-tapizada-led.png", pathname: "" }],
+    coverIndex: 0,
   },
   {
     id: "7",
@@ -168,7 +181,8 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-slate-900 via-gray-900 to-black",
     accentColor: "blue",
-    image: "/images/biblioteca-modular.png",
+    images: [{ url: "/images/biblioteca-modular.png", pathname: "" }],
+    coverIndex: 0,
   },
   {
     id: "9",
@@ -197,14 +211,7 @@ export const products: Product[] = [
     priceRange: "Consultar",
     gradient: "from-zinc-900 via-neutral-900 to-black",
     accentColor: "blue",
-    image: "/images/cocina-modular-led.png",
+    images: [{ url: "/images/cocina-modular-led.png", pathname: "" }],
+    coverIndex: 0,
   },
 ];
-
-export const getProductsByCategory = (category: string) =>
-  products.filter((p) => p.category === category);
-
-export const getProductBySlug = (slug: string) =>
-  products.find((p) => p.slug === slug);
-
-export const featuredProducts = products.slice(0, 5);

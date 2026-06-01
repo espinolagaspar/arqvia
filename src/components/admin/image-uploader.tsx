@@ -12,12 +12,6 @@ import {
   ArrowRight,
   Loader2,
 } from "lucide-react";
-import {
-  attachImagesAction,
-  removeImageAction,
-  setCoverAction,
-  reorderImagesAction,
-} from "@/app/admin/actions";
 import type { ProjectImage } from "@/types";
 
 function sanitizeName(name: string): string {
@@ -28,14 +22,26 @@ function sanitizeName(name: string): string {
     .slice(0, 60);
 }
 
+export type ImageUploaderActions = {
+  attach: (id: string, images: ProjectImage[]) => Promise<void>;
+  remove: (id: string, pathname: string) => Promise<void>;
+  setCover: (id: string, index: number) => Promise<void>;
+  reorder: (id: string, pathnamesInOrder: string[]) => Promise<void>;
+};
+
 export function ImageUploader({
   id,
   images,
   coverIndex,
+  pathPrefix,
+  actions,
 }: {
   id: string;
   images: ProjectImage[];
   coverIndex: number;
+  /** Carpeta en el Blob: "projects" o "products". */
+  pathPrefix: string;
+  actions: ImageUploaderActions;
 }) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -60,7 +66,7 @@ export function ImageUploader({
     for (const file of files) {
       try {
         const blob = await upload(
-          `projects/${id}/${crypto.randomUUID()}-${sanitizeName(file.name)}`,
+          `${pathPrefix}/${id}/${crypto.randomUUID()}-${sanitizeName(file.name)}`,
           file,
           {
             access: "public",
@@ -80,7 +86,7 @@ export function ImageUploader({
     }
 
     if (uploaded.length > 0) {
-      await attachImagesAction(id, uploaded);
+      await actions.attach(id, uploaded);
       router.refresh();
     }
     if (failed.length > 0) {
@@ -98,7 +104,7 @@ export function ImageUploader({
     const order = images.map((im) => im.pathname);
     [order[index], order[target]] = [order[target], order[index]];
     startTransition(async () => {
-      await reorderImagesAction(id, order);
+      await actions.reorder(id, order);
       router.refresh();
     });
   }
@@ -196,7 +202,7 @@ export function ImageUploader({
                         disabled={busy}
                         onClick={() =>
                           startTransition(async () => {
-                            await setCoverAction(id, i);
+                            await actions.setCover(id, i);
                             router.refresh();
                           })
                         }
@@ -211,7 +217,7 @@ export function ImageUploader({
                       disabled={busy}
                       onClick={() =>
                         startTransition(async () => {
-                          await removeImageAction(id, img.pathname);
+                          await actions.remove(id, img.pathname);
                           router.refresh();
                         })
                       }

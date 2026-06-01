@@ -7,27 +7,15 @@ import {
   SESSION_COOKIE,
   SESSION_MAX_AGE,
   signSession,
-  verifySession,
   verifyPassword,
 } from "@/lib/auth";
+import { requireAuth } from "@/lib/admin/guard";
 import {
   getProjects,
   saveProjects,
   deleteProjectImages,
-  isBlobConfigured,
 } from "@/lib/projects/store";
 import type { Project, ProjectImage } from "@/types";
-
-async function requireAuth(): Promise<void> {
-  const store = await cookies();
-  const ok = await verifySession(store.get(SESSION_COOKIE)?.value);
-  if (!ok) throw new Error("No autorizado");
-  if (!isBlobConfigured()) {
-    throw new Error(
-      "Vercel Blob no está configurado (falta BLOB_READ_WRITE_TOKEN). No se puede guardar.",
-    );
-  }
-}
 
 function revalidateAll(): void {
   revalidatePath("/proyectos");

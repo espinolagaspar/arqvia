@@ -7,8 +7,7 @@ import Image from "next/image";
 import { ArrowUpRight, Zap, Wifi, Usb, SlidersHorizontal } from "lucide-react";
 import { SectionHeader } from "@/components/shared/section-header";
 import { LEDBadge } from "@/components/shared/led-badge";
-import { products } from "@/lib/data/products";
-import type { ProductCategory } from "@/types";
+import type { Product, ProductCategory } from "@/types";
 import { cn } from "@/lib/utils";
 
 type FilterCategory = ProductCategory | "todos";
@@ -28,7 +27,7 @@ const productTones: Record<string, string> = {
   cocina:     "from-[#10100e] to-[#0a0a0a]",
 };
 
-export function CatalogClient() {
+export function CatalogClient({ products }: { products: Product[] }) {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("todos");
   const [showLEDOnly, setShowLEDOnly] = useState(false);
 
@@ -101,7 +100,10 @@ export function CatalogClient() {
             layout
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"
           >
-            {filtered.map((product) => (
+            {filtered.map((product) => {
+              const cover =
+                product.images[product.coverIndex] ?? product.images[0] ?? null;
+              return (
               <motion.div
                 key={product.id}
                 layout
@@ -116,9 +118,9 @@ export function CatalogClient() {
                 >
                   {/* Visual */}
                   <div className="relative h-44 overflow-hidden">
-                    {product.image ? (
+                    {cover ? (
                       <Image
-                        src={product.image}
+                        src={cover.url}
                         alt={product.name}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -133,7 +135,7 @@ export function CatalogClient() {
                       />
                     )}
                     {/* Architectural lines on non-image cards */}
-                    {!product.image && (
+                    {!cover && (
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
                         <div className="absolute top-5 left-5 right-5 h-px bg-white/[0.05]" />
                         <div className="absolute top-5 left-5 bottom-5 w-px bg-white/[0.05]" />
@@ -175,7 +177,8 @@ export function CatalogClient() {
                   </div>
                 </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </AnimatePresence>
 
