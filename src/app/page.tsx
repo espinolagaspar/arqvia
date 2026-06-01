@@ -6,6 +6,7 @@ import { Gallery } from "@/components/home/gallery";
 import { ProcessTimeline } from "@/components/home/process-timeline";
 import { CTAFinal } from "@/components/home/cta-final";
 import { getProducts } from "@/lib/products/store";
+import { getProjects } from "@/lib/projects/store";
 
 export const dynamic = "force-dynamic";
 
@@ -16,13 +17,16 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const products = await getProducts();
+  const [products, projects] = await Promise.all([
+    getProducts(),
+    getProjects(),
+  ]);
   return (
     <>
       <Hero />
       <FeaturedProducts products={products.slice(0, 5)} />
       <Differentials />
-      <Gallery />
+      <Gallery projects={projects} />
       <ProcessTimeline />
       <CTAFinal />
     </>

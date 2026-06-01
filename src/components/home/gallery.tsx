@@ -1,51 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
 import { SectionHeader } from "@/components/shared/section-header";
 import { cn } from "@/lib/utils";
+import type { Project } from "@/types";
 
-const galleryItems = [
-  { tone: "from-[#111] via-[#0e0e0e] to-[#0a0a0a]", label: "Mesa de luz", span: "col-span-2 row-span-2" },
-  { tone: "from-[#0f0f0f] via-[#0d0d0d] to-[#0a0a0a]", label: "Placard a medida", span: "col-span-1 row-span-1" },
-  { tone: "from-[#120d0d] via-[#0f0f0f] to-[#0a0a0a]", label: "Escritorio premium", span: "col-span-1 row-span-1" },
-  { tone: "from-[#0d0d0f] via-[#0f0f0f] to-[#0a0a0a]", label: "Home office", span: "col-span-1 row-span-2" },
-  { tone: "from-[#0f0f0f] via-[#0e0e0e] to-[#0a0a0a]", label: "Living room", span: "col-span-2 row-span-1" },
-  { tone: "from-[#11100a] via-[#0f0f0f] to-[#0a0a0a]", label: "Cocina moderna", span: "col-span-1 row-span-1" },
-  { tone: "from-[#0f0f0f] via-[#0d0d0d] to-[#0a0a0a]", label: "Dormitorio", span: "col-span-1 row-span-1" },
+const DEFAULT_GRADIENT = "from-[#111] to-[#0a0a0a]";
+
+// Patrón masonry para hasta 7 items.
+const SPANS = [
+  "col-span-2 row-span-2",
+  "col-span-1 row-span-1",
+  "col-span-1 row-span-1",
+  "col-span-1 row-span-2",
+  "col-span-2 row-span-1",
+  "col-span-1 row-span-1",
+  "col-span-1 row-span-1",
 ];
 
-function GalleryCard({ item, index }: { item: (typeof galleryItems)[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.6, delay: index * 0.06, ease: [0.25, 0.1, 0.25, 1] }}
-      className={cn("group relative rounded-lg overflow-hidden cursor-pointer", item.span)}
-      style={{ minHeight: "160px" }}
-    >
-      <div
-        className={cn(
-          "absolute inset-0 bg-gradient-to-br transition-transform duration-700 group-hover:scale-[1.03]",
-          item.tone
-        )}
-      />
-
-      {/* Architectural grid lines — very subtle */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <div className="absolute top-6 left-6 right-6 h-px bg-white/[0.06]" />
-        <div className="absolute top-6 left-6 bottom-6 w-px bg-white/[0.06]" />
-      </div>
-
-      {/* Label — appears on hover, editorial style */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span className="text-xs font-light text-ef-white/80 tracking-wide">{item.label}</span>
-      </div>
-    </motion.div>
-  );
+function cover(project: Project) {
+  return project.images[project.coverIndex] ?? project.images[0] ?? null;
 }
 
-export function Gallery() {
+export function Gallery({ projects }: { projects: Project[] }) {
+  const items = projects.slice(0, 7);
+  if (items.length === 0) return null;
+
   return (
     <section className="section-padding bg-ef-black">
       <div className="container-ef">
@@ -64,31 +46,90 @@ export function Gallery() {
             gridTemplateRows: "repeat(3, 160px)",
           }}
         >
-          {galleryItems.map((item, i) => (
-            <GalleryCard key={i} item={item} index={i} />
-          ))}
+          {items.map((project, i) => {
+            const img = cover(project);
+            return (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: i * 0.06, ease: [0.25, 0.1, 0.25, 1] }}
+                className={cn(SPANS[i] ?? "col-span-1 row-span-1")}
+              >
+                <Link
+                  href="/proyectos"
+                  className="group relative block w-full h-full rounded-lg overflow-hidden"
+                >
+                  {img ? (
+                    <Image
+                      src={img.url}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      sizes="(max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div
+                      className={cn(
+                        "absolute inset-0 bg-gradient-to-br transition-transform duration-700 group-hover:scale-[1.03]",
+                        project.gradient ?? DEFAULT_GRADIENT,
+                      )}
+                    />
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/75 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-xs font-light text-ef-white/90 tracking-wide">
+                      {project.title}
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Mobile: simple 2-col */}
         <div className="grid grid-cols-2 gap-3 md:hidden">
-          {galleryItems.map((item, i) => (
-            <motion.div
-              key={`mob-${i}`}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className={cn(
-                "group relative h-36 rounded-lg overflow-hidden",
-                i === 0 ? "col-span-2" : ""
-              )}
-            >
-              <div className={cn("absolute inset-0 bg-gradient-to-br", item.tone)} />
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
-                <span className="text-xs text-ef-white/70 font-light">{item.label}</span>
-              </div>
-            </motion.div>
-          ))}
+          {items.map((project, i) => {
+            const img = cover(project);
+            return (
+              <motion.div
+                key={`mob-${project.id}`}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                className={cn(i === 0 ? "col-span-2" : "")}
+              >
+                <Link
+                  href="/proyectos"
+                  className="group relative block h-36 rounded-lg overflow-hidden"
+                >
+                  {img ? (
+                    <Image
+                      src={img.url}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div
+                      className={cn(
+                        "absolute inset-0 bg-gradient-to-br",
+                        project.gradient ?? DEFAULT_GRADIENT,
+                      )}
+                    />
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+                    <span className="text-xs text-ef-white/80 font-light">
+                      {project.title}
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
