@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ef-black: #0A0A0A;
-  --color-ef-graphite: #141414;
-  --color-ef-surface: #1A1A1A;
-  --color-ef-surface-2: #1D1D1D;
-  --color-ef-border: #2A2A2A;
-  --color-ef-white: #F5F5F5;
-  --color-ef-dim: #A1A1AA;
-  --color-ef-blue: #4B82F0;
-  --color-ef-blue-soft: rgba(75, 130, 240, 0.10);
-  --color-ef-red: #991B1B;
+  --color-arq-black: #0A0A0A;
+  --color-arq-graphite: #141414;
+  --color-arq-surface: #1A1A1A;
+  --color-arq-surface-2: #1D1D1D;
+  --color-arq-border: #2A2A2A;
+  --color-arq-white: #F5F5F5;
+  --color-arq-dim: #A1A1AA;
+  --color-arq-blue: #4B82F0;
+  --color-arq-blue-soft: rgba(75, 130, 240, 0.10);
+  --color-arq-red: #991B1B;
 
   --font-geist: var(--font-geist-sans);
 
@@ -227,7 +227,7 @@
     }
   }
 
-  .container-ef {
+  .container-arq {
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
@@ -236,7 +236,7 @@
   }
 
   @media (min-width: 1280px) {
-    .container-ef {
+    .container-arq {
       padding-left: 3rem;
       padding-right: 3rem;
     }

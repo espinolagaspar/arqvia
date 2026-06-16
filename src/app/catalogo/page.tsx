@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Catálogo",
   description:
-    "Explorá el catálogo completo de muebles modernos de efstudio. Dormitorio, living, oficina y cocina con LED, USB y carga inalámbrica.",
+    "Explorá el catálogo completo de muebles modernos de ARQVIA. Dormitorio, living, oficina y cocina con LED, USB y carga inalámbrica.",
 };
 
 export default async function CatalogoPage() {

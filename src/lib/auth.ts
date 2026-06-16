@@ -17,7 +17,7 @@ function getSecret(): string {
   return (
     process.env.SESSION_SECRET ||
     process.env.ADMIN_PASSWORD ||
-    "efstudio-dev-secret-cambiar-en-produccion"
+    "arqvia-dev-secret-cambiar-en-produccion"
   );
 }
 

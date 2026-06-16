@@ -86,21 +86,21 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
                 )}
                 {project.year && (
                   <div className="absolute top-4 right-4">
-                    <span className="glass px-2 py-1 rounded-sm text-xs text-ef-dim/80 font-light">
+                    <span className="glass px-2 py-1 rounded-sm text-xs text-arq-dim/80 font-light">
                       {project.year}
                     </span>
                   </div>
                 )}
                 {project.images.length > 1 && (
                   <div className="absolute bottom-4 left-4">
-                    <span className="glass px-2 py-1 rounded-sm text-[10px] text-ef-white/80 font-light">
+                    <span className="glass px-2 py-1 rounded-sm text-[10px] text-arq-white/80 font-light">
                       {project.images.length} fotos
                     </span>
                   </div>
                 )}
                 {clickable && (
                   <div className="absolute bottom-4 right-4 p-1.5 rounded-sm glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-                    <ArrowUpRight size={13} className="text-ef-white" />
+                    <ArrowUpRight size={13} className="text-arq-white" />
                   </div>
                 )}
               </div>
@@ -112,26 +112,26 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
                     <LEDBadge label={project.category} color={project.accentColor} />
                   </div>
                 )}
-                <h3 className="text-sm font-medium text-ef-white mb-1 leading-snug">
+                <h3 className="text-sm font-medium text-arq-white mb-1 leading-snug">
                   {project.title}
                 </h3>
                 {project.location && (
-                  <div className="flex items-center gap-1 text-xs text-ef-dim/60 mb-3 font-light">
+                  <div className="flex items-center gap-1 text-xs text-arq-dim/60 mb-3 font-light">
                     <MapPin size={10} />
                     {project.location}
                   </div>
                 )}
                 {project.description && (
-                  <p className="text-xs text-ef-dim leading-relaxed mb-4 line-clamp-3 font-light">
+                  <p className="text-xs text-arq-dim leading-relaxed mb-4 line-clamp-3 font-light">
                     {project.description}
                   </p>
                 )}
                 {project.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-ef-border">
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-arq-border">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] px-2 py-0.5 rounded-sm bg-white/[0.04] text-ef-dim/70 font-light"
+                        className="text-[10px] px-2 py-0.5 rounded-sm bg-white/[0.04] text-arq-dim/70 font-light"
                       >
                         {tag}
                       </span>
@@ -158,7 +158,7 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
             <button
               onClick={close}
               aria-label="Cerrar"
-              className="absolute top-5 right-5 p-2 rounded-sm text-ef-dim hover:text-ef-white transition-colors"
+              className="absolute top-5 right-5 p-2 rounded-sm text-arq-dim hover:text-arq-white transition-colors"
             >
               <X size={22} />
             </button>
@@ -184,14 +184,14 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
                   <button
                     onClick={() => step(-1)}
                     aria-label="Anterior"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full glass text-ef-white hover:bg-white/10 transition-colors"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full glass text-arq-white hover:bg-white/10 transition-colors"
                   >
                     <ChevronLeft size={20} />
                   </button>
                   <button
                     onClick={() => step(1)}
                     aria-label="Siguiente"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full glass text-ef-white hover:bg-white/10 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full glass text-arq-white hover:bg-white/10 transition-colors"
                   >
                     <ChevronRight size={20} />
                   </button>
@@ -200,16 +200,16 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
 
               <div className="mt-4 flex items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-sm font-medium text-ef-white">
+                  <h3 className="text-sm font-medium text-arq-white">
                     {active.title}
                   </h3>
                   {active.location && (
-                    <p className="text-xs text-ef-dim font-light">
+                    <p className="text-xs text-arq-dim font-light">
                       {active.location}
                     </p>
                   )}
                 </div>
-                <span className="text-xs text-ef-dim/60 font-light flex-shrink-0">
+                <span className="text-xs text-arq-dim/60 font-light flex-shrink-0">
                   {index + 1} / {active.images.length}
                 </span>
               </div>

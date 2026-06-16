@@ -11,4 +11,4 @@ export function formatWhatsAppUrl(message: string, phone = "5491132368891") {
 
 export const WHATSAPP_NUMBER = "5491132368891";
 export const WHATSAPP_DEFAULT_MSG =
-  "Hola! Me interesa conocer más sobre los muebles de efstudio.";
+  "Hola! Me interesa conocer más sobre los muebles de ARQVIA.";

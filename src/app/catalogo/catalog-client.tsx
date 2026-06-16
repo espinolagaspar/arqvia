@@ -38,11 +38,11 @@ export function CatalogClient({ products }: { products: Product[] }) {
   });
 
   return (
-    <div className="min-h-screen bg-ef-black pt-24">
+    <div className="min-h-screen bg-arq-black pt-24">
       {/* Hero */}
-      <div className="container-ef py-12 border-b border-ef-border">
+      <div className="container-arq py-12 border-b border-arq-border">
         <SectionHeader
-          eyebrow="efstudio"
+          eyebrow="ARQVIA"
           title="Catálogo"
           titleAccent="completo"
           description="Cada mueble diseñado para transformar tu espacio. Seleccioná la categoría que te interesa."
@@ -59,8 +59,8 @@ export function CatalogClient({ products }: { products: Product[] }) {
                 className={cn(
                   "px-4 py-2 rounded-sm text-xs font-light tracking-wide transition-all duration-200",
                   activeCategory === cat.value
-                    ? "bg-ef-white text-ef-black font-medium"
-                    : "glass text-ef-dim hover:text-ef-white hover:border-white/10"
+                    ? "bg-arq-white text-arq-black font-medium"
+                    : "glass text-arq-dim hover:text-arq-white hover:border-white/10"
                 )}
               >
                 {cat.label}
@@ -73,8 +73,8 @@ export function CatalogClient({ products }: { products: Product[] }) {
             className={cn(
               "flex items-center gap-2 px-4 py-2 rounded-sm text-xs font-light tracking-wide transition-all duration-200",
               showLEDOnly
-                ? "bg-white/10 text-ef-white border border-white/20"
-                : "glass text-ef-dim hover:text-ef-white"
+                ? "bg-white/10 text-arq-white border border-white/20"
+                : "glass text-arq-dim hover:text-arq-white"
             )}
           >
             <Zap size={12} />
@@ -84,12 +84,12 @@ export function CatalogClient({ products }: { products: Product[] }) {
       </div>
 
       {/* Grid */}
-      <div className="container-ef py-12">
+      <div className="container-arq py-12">
         <div className="flex items-center justify-between mb-6">
-          <span className="text-xs text-ef-dim font-light">
+          <span className="text-xs text-arq-dim font-light">
             {filtered.length} producto{filtered.length !== 1 ? "s" : ""}
           </span>
-          <button className="flex items-center gap-2 text-xs text-ef-dim hover:text-ef-white transition-colors font-light">
+          <button className="flex items-center gap-2 text-xs text-arq-dim hover:text-arq-white transition-colors font-light">
             <SlidersHorizontal size={13} />
             Ordenar
           </button>
@@ -142,7 +142,7 @@ export function CatalogClient({ products }: { products: Product[] }) {
                       </div>
                     )}
                     <div className="absolute top-3 right-3 p-1.5 rounded-sm glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">
-                      <ArrowUpRight size={11} className="text-ef-white" />
+                      <ArrowUpRight size={11} className="text-arq-white" />
                     </div>
                   </div>
 
@@ -151,18 +151,18 @@ export function CatalogClient({ products }: { products: Product[] }) {
                     <div className="flex items-center gap-2 mb-2">
                       <LEDBadge label={product.category} color={product.accentColor} />
                     </div>
-                    <h3 className="text-xs font-medium text-ef-white mb-1 group-hover:text-ef-white/90 transition-colors leading-snug">
+                    <h3 className="text-xs font-medium text-arq-white mb-1 group-hover:text-arq-white/90 transition-colors leading-snug">
                       {product.name}
                     </h3>
-                    <p className="text-[11px] text-ef-dim leading-relaxed mb-3 line-clamp-2 font-light">
+                    <p className="text-[11px] text-arq-dim leading-relaxed mb-3 line-clamp-2 font-light">
                       {product.description}
                     </p>
 
                     {/* Icons row */}
-                    <div className="flex items-center gap-2.5 pt-3 border-t border-ef-border">
-                      {product.hasLED && <Zap size={11} className="text-ef-dim/60" />}
-                      {product.hasUSB && <Usb size={11} className="text-ef-dim/60" />}
-                      {product.hasWirelessCharging && <Wifi size={11} className="text-ef-dim/60" />}
+                    <div className="flex items-center gap-2.5 pt-3 border-t border-arq-border">
+                      {product.hasLED && <Zap size={11} className="text-arq-dim/60" />}
+                      {product.hasUSB && <Usb size={11} className="text-arq-dim/60" />}
+                      {product.hasWirelessCharging && <Wifi size={11} className="text-arq-dim/60" />}
                       <div className="ml-auto flex gap-1">
                         {product.colors.slice(0, 3).map((c) => (
                           <div
@@ -184,7 +184,7 @@ export function CatalogClient({ products }: { products: Product[] }) {
 
         {filtered.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <p className="text-ef-dim mb-4 font-light text-sm">No hay productos para este filtro.</p>
+            <p className="text-arq-dim mb-4 font-light text-sm">No hay productos para este filtro.</p>
             <button
               onClick={() => { setActiveCategory("todos"); setShowLEDOnly(false); }}
               className="btn-secondary text-xs"

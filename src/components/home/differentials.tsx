@@ -67,9 +67,9 @@ const differentials = [
 export function Differentials() {
   return (
     <section className="section-padding bg-[#0D0D0D]">
-      <div className="container-ef">
+      <div className="container-arq">
         <SectionHeader
-          eyebrow="Por qué efstudio"
+          eyebrow="Por qué ARQVIA"
           title="Lo que nos"
           titleAccent="distingue"
           description="No fabricamos muebles. Fabricamos la experiencia de vivir en un espacio que te representa."
@@ -88,12 +88,12 @@ export function Differentials() {
                 className="group glass glass-hover rounded-lg p-6 transition-all duration-300"
               >
                 <div className="inline-flex items-center justify-center w-9 h-9 rounded-sm mb-5 bg-white/[0.04] transition-colors group-hover:bg-white/[0.07]">
-                  <Icon size={16} className="text-ef-dim group-hover:text-ef-white transition-colors" />
+                  <Icon size={16} className="text-arq-dim group-hover:text-arq-white transition-colors" />
                 </div>
-                <h3 className="font-medium text-ef-white text-sm mb-2 leading-snug">
+                <h3 className="font-medium text-arq-white text-sm mb-2 leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-xs text-ef-dim leading-relaxed font-light">
+                <p className="text-xs text-arq-dim leading-relaxed font-light">
                   {item.description}
                 </p>
               </motion.div>

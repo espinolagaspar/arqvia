@@ -33,7 +33,7 @@ const presupuestos = [
 ];
 
 const inputClass =
-  "w-full bg-ef-surface-2 rounded-sm px-4 py-3 text-sm text-ef-white placeholder:text-ef-dim/40 focus:outline-none focus:ring-1 focus:ring-white/10 transition-all border border-ef-border font-light";
+  "w-full bg-arq-surface-2 rounded-sm px-4 py-3 text-sm text-arq-white placeholder:text-arq-dim/40 focus:outline-none focus:ring-1 focus:ring-white/10 transition-all border border-arq-border font-light";
 
 export default function CotizacionPage() {
   const [formData, setFormData] = useState({
@@ -55,7 +55,7 @@ export default function CotizacionPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const msg = `Hola efstudio! Quiero cotizar:\n
+    const msg = `Hola ARQVIA! Quiero cotizar:\n
 Nombre: ${formData.nombre}
 WhatsApp: ${formData.whatsapp}
 Ambiente: ${formData.ambiente}
@@ -69,7 +69,7 @@ Detalle: ${formData.descripcion}`;
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-ef-black flex items-center justify-center">
+      <div className="min-h-screen bg-arq-black flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -79,10 +79,10 @@ Detalle: ${formData.descripcion}`;
           <div className="w-16 h-16 rounded-sm bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-6">
             <CheckCircle size={28} className="text-green-400" />
           </div>
-          <h2 className="text-3xl font-light tracking-tight text-ef-white mb-3">
+          <h2 className="text-3xl font-light tracking-tight text-arq-white mb-3">
             ¡Mensaje enviado!
           </h2>
-          <p className="text-ef-dim leading-relaxed mb-8 font-light text-sm">
+          <p className="text-arq-dim leading-relaxed mb-8 font-light text-sm">
             Te redirigimos a WhatsApp. En menos de 24hs te respondemos con una
             propuesta personalizada.
           </p>
@@ -98,26 +98,26 @@ Detalle: ${formData.descripcion}`;
   }
 
   return (
-    <div className="min-h-screen bg-ef-black">
+    <div className="min-h-screen bg-arq-black">
       {/* Hero */}
-      <div className="relative pt-36 pb-12 overflow-hidden border-b border-ef-border">
-        <div className="container-ef relative max-w-2xl">
+      <div className="relative pt-36 pb-12 overflow-hidden border-b border-arq-border">
+        <div className="container-arq relative max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <div className="flex items-center gap-3 mb-7">
-              <div className="w-5 h-px bg-ef-dim/30" />
-              <span className="text-xs font-normal tracking-[0.16em] uppercase text-ef-dim/60">
+              <div className="w-5 h-px bg-arq-dim/30" />
+              <span className="text-xs font-normal tracking-[0.16em] uppercase text-arq-dim/60">
                 Cotización
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-light tracking-[-0.03em] text-ef-white mb-4 leading-[1.05]">
+            <h1 className="text-4xl sm:text-5xl font-light tracking-[-0.03em] text-arq-white mb-4 leading-[1.05]">
               Diseñemos tu{" "}
               <span className="font-semibold">espacio</span>
             </h1>
-            <p className="text-ef-dim text-base leading-relaxed font-light">
+            <p className="text-arq-dim text-base leading-relaxed font-light">
               Completá el formulario y en menos de 24hs te enviamos una propuesta
               con diseño 3D incluido. Sin costo.
             </p>
@@ -126,7 +126,7 @@ Detalle: ${formData.descripcion}`;
       </div>
 
       {/* Form */}
-      <div className="container-ef py-16 max-w-2xl">
+      <div className="container-arq py-16 max-w-2xl">
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ Detalle: ${formData.descripcion}`;
           {/* Nombre + WhatsApp */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[10px] font-medium text-ef-dim/50 mb-2 uppercase tracking-[0.14em]">
+              <label className="block text-[10px] font-medium text-arq-dim/50 mb-2 uppercase tracking-[0.14em]">
                 Nombre *
               </label>
               <input
@@ -150,7 +150,7 @@ Detalle: ${formData.descripcion}`;
               />
             </div>
             <div>
-              <label className="block text-[10px] font-medium text-ef-dim/50 mb-2 uppercase tracking-[0.14em]">
+              <label className="block text-[10px] font-medium text-arq-dim/50 mb-2 uppercase tracking-[0.14em]">
                 WhatsApp *
               </label>
               <input
@@ -166,7 +166,7 @@ Detalle: ${formData.descripcion}`;
 
           {/* Ambiente */}
           <div>
-            <label className="block text-[10px] font-medium text-ef-dim/50 mb-2 uppercase tracking-[0.14em]">
+            <label className="block text-[10px] font-medium text-arq-dim/50 mb-2 uppercase tracking-[0.14em]">
               Ambiente *
             </label>
             <select
@@ -189,7 +189,7 @@ Detalle: ${formData.descripcion}`;
 
           {/* Medidas */}
           <div>
-            <label className="block text-[10px] font-medium text-ef-dim/50 mb-2 uppercase tracking-[0.14em]">
+            <label className="block text-[10px] font-medium text-arq-dim/50 mb-2 uppercase tracking-[0.14em]">
               Medidas aproximadas
             </label>
             <input
@@ -203,7 +203,7 @@ Detalle: ${formData.descripcion}`;
 
           {/* Estilo */}
           <div>
-            <label className="block text-[10px] font-medium text-ef-dim/50 mb-3 uppercase tracking-[0.14em]">
+            <label className="block text-[10px] font-medium text-arq-dim/50 mb-3 uppercase tracking-[0.14em]">
               Estilo preferido
             </label>
             <div className="flex flex-wrap gap-2">
@@ -214,8 +214,8 @@ Detalle: ${formData.descripcion}`;
                   onClick={() => setFormData((prev) => ({ ...prev, estilo }))}
                   className={`px-4 py-2 rounded-sm text-xs font-light tracking-wide transition-all duration-200 ${
                     formData.estilo === estilo
-                      ? "bg-ef-white text-ef-black font-medium"
-                      : "glass text-ef-dim hover:text-ef-white"
+                      ? "bg-arq-white text-arq-black font-medium"
+                      : "glass text-arq-dim hover:text-arq-white"
                   }`}
                 >
                   {estilo}
@@ -226,7 +226,7 @@ Detalle: ${formData.descripcion}`;
 
           {/* Presupuesto */}
           <div>
-            <label className="block text-[10px] font-medium text-ef-dim/50 mb-3 uppercase tracking-[0.14em]">
+            <label className="block text-[10px] font-medium text-arq-dim/50 mb-3 uppercase tracking-[0.14em]">
               Presupuesto orientativo
             </label>
             <div className="flex flex-wrap gap-2">
@@ -237,8 +237,8 @@ Detalle: ${formData.descripcion}`;
                   onClick={() => setFormData((prev) => ({ ...prev, presupuesto: p }))}
                   className={`px-4 py-2 rounded-sm text-xs font-light tracking-wide transition-all duration-200 ${
                     formData.presupuesto === p
-                      ? "bg-ef-white text-ef-black font-medium"
-                      : "glass text-ef-dim hover:text-ef-white"
+                      ? "bg-arq-white text-arq-black font-medium"
+                      : "glass text-arq-dim hover:text-arq-white"
                   }`}
                 >
                   {p}
@@ -249,7 +249,7 @@ Detalle: ${formData.descripcion}`;
 
           {/* Descripción */}
           <div>
-            <label className="block text-[10px] font-medium text-ef-dim/50 mb-2 uppercase tracking-[0.14em]">
+            <label className="block text-[10px] font-medium text-arq-dim/50 mb-2 uppercase tracking-[0.14em]">
               Contanos más
             </label>
             <textarea
@@ -263,9 +263,9 @@ Detalle: ${formData.descripcion}`;
           </div>
 
           {/* Upload note */}
-          <div className="glass rounded-sm p-4 border border-ef-border flex items-start gap-3">
-            <div className="w-1 h-1 rounded-full bg-ef-dim/30 mt-1.5 flex-shrink-0" />
-            <p className="text-xs text-ef-dim font-light leading-relaxed">
+          <div className="glass rounded-sm p-4 border border-arq-border flex items-start gap-3">
+            <div className="w-1 h-1 rounded-full bg-arq-dim/30 mt-1.5 flex-shrink-0" />
+            <p className="text-xs text-arq-dim font-light leading-relaxed">
               Podés enviarnos fotos del espacio por WhatsApp una vez que te
               contactemos. Nos ayuda mucho a preparar tu propuesta.
             </p>
@@ -281,7 +281,7 @@ Detalle: ${formData.descripcion}`;
               Enviar cotización por WhatsApp
             </button>
             <a
-              href={formatWhatsAppUrl("Hola! Quiero cotizar un mueble con efstudio.")}
+              href={formatWhatsAppUrl("Hola! Quiero cotizar un mueble con ARQVIA.")}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary flex items-center justify-center gap-2"
@@ -291,7 +291,7 @@ Detalle: ${formData.descripcion}`;
             </a>
           </div>
 
-          <p className="text-[11px] text-ef-dim/50 text-center font-light">
+          <p className="text-[11px] text-arq-dim/50 text-center font-light">
             Al enviar el formulario se abrirá WhatsApp con el resumen de tu
             consulta. Respondemos en menos de 24hs.
           </p>

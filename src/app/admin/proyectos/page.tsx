@@ -12,12 +12,12 @@ export default async function AdminProyectosPage() {
   const configured = isBlobConfigured();
 
   return (
-    <div className="container-ef py-12">
+    <div className="container-arq py-12">
       {/* Header */}
       <h1 className="text-2xl font-semibold tracking-tight mb-2">Proyectos</h1>
-      <p className="text-sm text-ef-dim font-light mb-8">
+      <p className="text-sm text-arq-dim font-light mb-8">
         {projects.length} proyecto{projects.length !== 1 ? "s" : ""} · se ven en{" "}
-        <Link href="/proyectos" className="underline hover:text-ef-white">
+        <Link href="/proyectos" className="underline hover:text-arq-white">
           /proyectos
         </Link>
       </p>
@@ -64,22 +64,22 @@ export default async function AdminProyectosPage() {
                     sizes="80px"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-ef-dim/40">
+                  <div className="w-full h-full flex items-center justify-center text-arq-dim/40">
                     <ImageOff size={18} />
                   </div>
                 )}
               </div>
 
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-medium text-ef-white truncate">
+                <h3 className="text-sm font-medium text-arq-white truncate">
                   {project.title}
                 </h3>
-                <p className="text-xs text-ef-dim font-light truncate">
+                <p className="text-xs text-arq-dim font-light truncate">
                   {[project.category, project.location, project.year]
                     .filter(Boolean)
                     .join(" · ")}
                 </p>
-                <p className="text-[11px] text-ef-dim/60 mt-0.5">
+                <p className="text-[11px] text-arq-dim/60 mt-0.5">
                   {project.images.length} foto
                   {project.images.length !== 1 ? "s" : ""}
                 </p>
@@ -89,7 +89,7 @@ export default async function AdminProyectosPage() {
                 {configured ? (
                   <Link
                     href={`/admin/proyectos/${project.id}/edit`}
-                    className="flex items-center gap-1.5 text-xs text-ef-dim hover:text-ef-white transition-colors"
+                    className="flex items-center gap-1.5 text-xs text-arq-dim hover:text-arq-white transition-colors"
                   >
                     <Pencil size={13} />
                     Editar
@@ -97,7 +97,7 @@ export default async function AdminProyectosPage() {
                 ) : (
                   <span
                     title="Configurá Vercel Blob para editar"
-                    className="flex items-center gap-1.5 text-xs text-ef-dim/30 cursor-not-allowed"
+                    className="flex items-center gap-1.5 text-xs text-arq-dim/30 cursor-not-allowed"
                   >
                     <Pencil size={13} />
                     Editar

@@ -29,8 +29,8 @@ export function Gallery({ projects }: { projects: Project[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="section-padding bg-ef-black">
-      <div className="container-ef">
+    <section className="section-padding bg-arq-black">
+      <div className="container-arq">
         <SectionHeader
           eyebrow="Portfolio"
           title="Espacios que"
@@ -78,7 +78,7 @@ export function Gallery({ projects }: { projects: Project[] }) {
                     />
                   )}
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/75 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-xs font-light text-ef-white/90 tracking-wide">
+                    <span className="text-xs font-light text-arq-white/90 tracking-wide">
                       {project.title}
                     </span>
                   </div>
@@ -122,7 +122,7 @@ export function Gallery({ projects }: { projects: Project[] }) {
                     />
                   )}
                   <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
-                    <span className="text-xs text-ef-white/80 font-light">
+                    <span className="text-xs text-arq-white/80 font-light">
                       {project.title}
                     </span>
                   </div>

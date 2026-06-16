@@ -10,23 +10,23 @@ const contactChannels = [
     label: "WhatsApp",
     value: "+54 9 11 3236-8891",
     description: "",
-    action: formatWhatsAppUrl("Hola efstudio! Quiero hacer una consulta."),
+    action: formatWhatsAppUrl("Hola ARQVIA! Quiero hacer una consulta."),
     isGreen: true,
   },
   {
     icon: Camera,
     label: "Instagram",
-    value: "@efstudio",
+    value: "@arqvia",
     description: "Seguinos para ver proyectos y novedades",
-    action: "https://instagram.com/efstudio",
+    action: "https://instagram.com/arqvia",
     isGreen: false,
   },
   {
     icon: Mail,
     label: "Email",
-    value: "efstudio.service@gmail.com",
+    value: "arqvia.service@gmail.com",
     description: "Para consultas formales o presupuestos detallados",
-    action: "mailto:efstudio.service@gmail.com",
+    action: "mailto:arqvia.service@gmail.com",
     isGreen: false,
   },
 ];
@@ -46,27 +46,27 @@ const info = [
 
 export default function ContactoPage() {
   return (
-    <div className="min-h-screen bg-ef-black">
+    <div className="min-h-screen bg-arq-black">
       {/* Hero */}
-      <div className="relative pt-36 pb-16 overflow-hidden border-b border-ef-border">
-        <div className="container-ef relative">
+      <div className="relative pt-36 pb-16 overflow-hidden border-b border-arq-border">
+        <div className="container-arq relative">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <div className="flex items-center gap-3 mb-7">
-              <div className="w-5 h-px bg-ef-dim/30" />
-              <span className="text-xs font-normal tracking-[0.16em] uppercase text-ef-dim/60">
+              <div className="w-5 h-px bg-arq-dim/30" />
+              <span className="text-xs font-normal tracking-[0.16em] uppercase text-arq-dim/60">
                 Contacto
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-[-0.03em] text-ef-white mb-4 leading-[1.05]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-[-0.03em] text-arq-white mb-4 leading-[1.05]">
               Hablemos de
               <br />
               <span className="font-semibold">tu proyecto</span>
             </h1>
-            <p className="text-lg text-ef-dim leading-relaxed max-w-lg font-light">
+            <p className="text-lg text-arq-dim leading-relaxed max-w-lg font-light">
               Cada proyecto empieza con una conversación. Contanos qué tenés en mente
               y te asesoramos sin compromiso.
             </p>
@@ -74,11 +74,11 @@ export default function ContactoPage() {
         </div>
       </div>
 
-      <div className="container-ef py-16">
+      <div className="container-arq py-16">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Contact channels */}
           <div className="lg:col-span-3 space-y-3">
-            <h2 className="text-[10px] font-semibold text-ef-dim/50 uppercase tracking-[0.15em] mb-6">
+            <h2 className="text-[10px] font-semibold text-arq-dim/50 uppercase tracking-[0.15em] mb-6">
               Canales de contacto
             </h2>
             {contactChannels.map((channel, i) => {
@@ -96,22 +96,22 @@ export default function ContactoPage() {
                   className="group flex items-center gap-5 glass glass-hover rounded-lg p-6 transition-all duration-300"
                 >
                   <div className="flex-shrink-0 w-11 h-11 rounded-sm flex items-center justify-center bg-white/[0.04] transition-colors group-hover:bg-white/[0.07]">
-                    <Icon size={18} className={channel.isGreen ? "text-green-500" : "text-ef-dim group-hover:text-ef-white"} />
+                    <Icon size={18} className={channel.isGreen ? "text-green-500" : "text-arq-dim group-hover:text-arq-white"} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-[10px] text-ef-dim/50 mb-0.5 tracking-wide uppercase">{channel.label}</div>
-                    <div className="text-sm font-medium text-ef-white leading-snug">
+                    <div className="text-[10px] text-arq-dim/50 mb-0.5 tracking-wide uppercase">{channel.label}</div>
+                    <div className="text-sm font-medium text-arq-white leading-snug">
                       {channel.value}
                     </div>
                     {channel.description && (
-                      <div className="text-xs text-ef-dim mt-0.5 font-light">
+                      <div className="text-xs text-arq-dim mt-0.5 font-light">
                         {channel.description}
                       </div>
                     )}
                   </div>
                   <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-5 h-5 rounded-sm border border-ef-border flex items-center justify-center">
-                      <span className="text-ef-dim text-xs">→</span>
+                    <div className="w-5 h-5 rounded-sm border border-arq-border flex items-center justify-center">
+                      <span className="text-arq-dim text-xs">→</span>
                     </div>
                   </div>
                 </motion.a>
@@ -121,7 +121,7 @@ export default function ContactoPage() {
 
           {/* Info */}
           <div className="lg:col-span-2">
-            <h2 className="text-[10px] font-semibold text-ef-dim/50 uppercase tracking-[0.15em] mb-6">
+            <h2 className="text-[10px] font-semibold text-arq-dim/50 uppercase tracking-[0.15em] mb-6">
               Información
             </h2>
             <div className="glass rounded-lg p-6 space-y-6">
@@ -137,11 +137,11 @@ export default function ContactoPage() {
                     className="flex gap-4"
                   >
                     <div className="flex-shrink-0 w-8 h-8 rounded-sm bg-white/[0.04] flex items-center justify-center">
-                      <Icon size={14} className="text-ef-dim" />
+                      <Icon size={14} className="text-arq-dim" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-ef-dim/50 mb-0.5 uppercase tracking-wide font-light">{item.label}</div>
-                      <div className="text-sm text-ef-white font-light leading-snug">{item.value}</div>
+                      <div className="text-[10px] text-arq-dim/50 mb-0.5 uppercase tracking-wide font-light">{item.label}</div>
+                      <div className="text-sm text-arq-white font-light leading-snug">{item.value}</div>
                     </div>
                   </motion.div>
                 );
@@ -150,7 +150,7 @@ export default function ContactoPage() {
 
             {/* Direct WhatsApp CTA */}
             <motion.a
-              href={formatWhatsAppUrl("Hola efstudio! Quiero hacer una consulta sobre sus muebles.")}
+              href={formatWhatsAppUrl("Hola ARQVIA! Quiero hacer una consulta sobre sus muebles.")}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.01 }}

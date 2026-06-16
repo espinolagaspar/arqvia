@@ -43,15 +43,15 @@ export function SectionHeader({
             align === "center" ? "justify-center" : "justify-start"
           )}
         >
-          <div className="w-5 h-px bg-ef-dim/30" />
-          <span className="text-xs font-normal tracking-[0.16em] uppercase text-ef-dim/70">
+          <div className="w-5 h-px bg-arq-dim/30" />
+          <span className="text-xs font-normal tracking-[0.16em] uppercase text-arq-dim/70">
             {eyebrow}
           </span>
-          <div className="w-5 h-px bg-ef-dim/30" />
+          <div className="w-5 h-px bg-arq-dim/30" />
         </div>
       )}
 
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-[-0.025em] text-ef-white leading-[1.1]">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-[-0.025em] text-arq-white leading-[1.1]">
         {title}
         {titleAccent && (
           <>
@@ -62,7 +62,7 @@ export function SectionHeader({
       </h2>
 
       {description && (
-        <p className="mt-5 text-base sm:text-lg text-ef-dim leading-relaxed max-w-2xl mx-auto font-light">
+        <p className="mt-5 text-base sm:text-lg text-arq-dim leading-relaxed max-w-2xl mx-auto font-light">
           {description}
         </p>
       )}

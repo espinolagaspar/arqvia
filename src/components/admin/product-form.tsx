@@ -20,8 +20,8 @@ function SaveButton() {
 }
 
 const fieldClass =
-  "mt-2 w-full rounded-sm bg-white/[0.04] border border-ef-border px-3 py-2.5 text-sm text-ef-white outline-none focus:border-white/20";
-const labelClass = "text-[10px] uppercase tracking-[0.15em] text-ef-dim/60";
+  "mt-2 w-full rounded-sm bg-white/[0.04] border border-arq-border px-3 py-2.5 text-sm text-arq-white outline-none focus:border-white/20";
+const labelClass = "text-[10px] uppercase tracking-[0.15em] text-arq-dim/60";
 
 const CATEGORIES = [
   { value: "dormitorio", label: "Dormitorio" },
@@ -40,7 +40,7 @@ function Checkbox({
   defaultChecked: boolean;
 }) {
   return (
-    <label className="flex items-center gap-2 text-sm text-ef-white cursor-pointer">
+    <label className="flex items-center gap-2 text-sm text-arq-white cursor-pointer">
       <input
         type="checkbox"
         name={name}

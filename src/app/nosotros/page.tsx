@@ -44,17 +44,17 @@ function ValueCard({ item, i }: { item: (typeof values)[0]; i: number }) {
       className="glass glass-hover rounded-lg p-8 group transition-all duration-300"
     >
       <div className="inline-flex items-center justify-center w-10 h-10 rounded-sm mb-6 bg-white/[0.04] transition-colors group-hover:bg-white/[0.07]">
-        <Icon size={18} className="text-ef-dim group-hover:text-ef-white transition-colors" />
+        <Icon size={18} className="text-arq-dim group-hover:text-arq-white transition-colors" />
       </div>
-      <h3 className="text-base font-medium text-ef-white mb-3 leading-snug">{item.title}</h3>
-      <p className="text-sm text-ef-dim leading-relaxed font-light">{item.description}</p>
+      <h3 className="text-base font-medium text-arq-white mb-3 leading-snug">{item.title}</h3>
+      <p className="text-sm text-arq-dim leading-relaxed font-light">{item.description}</p>
     </motion.div>
   );
 }
 
 export default function NosotrosPage() {
   return (
-    <div className="min-h-screen bg-ef-black">
+    <div className="min-h-screen bg-arq-black">
       {/* Hero */}
       <div className="relative pt-36 pb-24 overflow-hidden">
         {/* Subtle depth */}
@@ -63,23 +63,23 @@ export default function NosotrosPage() {
           <div className="absolute top-0 right-0 w-1/2 bottom-0 bg-gradient-to-l from-white/[0.012] to-transparent" />
         </div>
 
-        <div className="container-ef relative max-w-4xl">
+        <div className="container-arq relative max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <div className="flex items-center gap-3 mb-10">
-              <div className="w-5 h-px bg-ef-dim/30" />
-              <span className="text-xs font-normal tracking-[0.16em] uppercase text-ef-dim/60">
+              <div className="w-5 h-px bg-arq-dim/30" />
+              <span className="text-xs font-normal tracking-[0.16em] uppercase text-arq-dim/60">
                 Nuestra historia
               </span>
             </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-[-0.03em] text-ef-white mb-8 leading-[1.05]">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-[-0.03em] text-arq-white mb-8 leading-[1.05]">
               Diseño +<br />
               <span className="font-semibold">Tecnología.</span>
             </h1>
-            <p className="text-lg text-ef-dim leading-relaxed max-w-2xl font-light">
+            <p className="text-lg text-arq-dim leading-relaxed max-w-2xl font-light">
               Nació de una obsesión compartida: un arquitecto y un ingeniero de
               software que no encontraban muebles a la altura de sus espacios.
               Así que los fabricamos nosotros.
@@ -89,7 +89,7 @@ export default function NosotrosPage() {
       </div>
 
       {/* Story */}
-      <div className="container-ef pb-24">
+      <div className="container-arq pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
           {/* Visual — architectural composition */}
           <motion.div
@@ -121,10 +121,10 @@ export default function NosotrosPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-ef-white mb-6 leading-snug">
+            <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-arq-white mb-6 leading-snug">
               El problema que<br /><span className="font-semibold">decidimos resolver</span>
             </h2>
-            <div className="space-y-4 text-ef-dim leading-relaxed font-light text-sm sm:text-base">
+            <div className="space-y-4 text-arq-dim leading-relaxed font-light text-sm sm:text-base">
               <p>
                 Los muebles modernos que existían se veían bien en foto pero eran
                 genéricos, sin atención al detalle, sin pensar en cómo vivimos
@@ -137,7 +137,7 @@ export default function NosotrosPage() {
               </p>
               <p>
                 Decidimos que podíamos hacerlo mejor. Unimos arquitectura con
-                tecnología, y efstudio nació como la respuesta a esa brecha.
+                tecnología, y ARQVIA nació como la respuesta a esa brecha.
               </p>
             </div>
           </motion.div>
@@ -186,13 +186,13 @@ export default function NosotrosPage() {
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               className="glass rounded-lg p-8"
             >
-              <div className="w-14 h-14 rounded-sm mb-6 flex items-center justify-center text-2xl font-semibold bg-white/[0.04] text-ef-white/30 border border-white/[0.06]">
+              <div className="w-14 h-14 rounded-sm mb-6 flex items-center justify-center text-2xl font-semibold bg-white/[0.04] text-arq-white/30 border border-white/[0.06]">
                 {member.letter}
               </div>
-              <h3 className="text-sm font-medium text-ef-white mb-3 leading-snug">
+              <h3 className="text-sm font-medium text-arq-white mb-3 leading-snug">
                 {member.role}
               </h3>
-              <p className="text-sm text-ef-dim leading-relaxed font-light">
+              <p className="text-sm text-arq-dim leading-relaxed font-light">
                 {member.description}
               </p>
             </motion.div>

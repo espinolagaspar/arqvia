@@ -27,7 +27,7 @@ export function LoginForm({ next }: { next: string }) {
       <div>
         <label
           htmlFor="password"
-          className="text-[10px] uppercase tracking-[0.15em] text-ef-dim/60"
+          className="text-[10px] uppercase tracking-[0.15em] text-arq-dim/60"
         >
           Contraseña
         </label>
@@ -37,7 +37,7 @@ export function LoginForm({ next }: { next: string }) {
           type="password"
           autoFocus
           autoComplete="current-password"
-          className="mt-2 w-full rounded-sm bg-white/[0.04] border border-ef-border px-4 py-3 text-sm text-ef-white outline-none focus:border-white/20"
+          className="mt-2 w-full rounded-sm bg-white/[0.04] border border-arq-border px-4 py-3 text-sm text-arq-white outline-none focus:border-white/20"
         />
       </div>
       {state.error && (

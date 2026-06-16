@@ -17,8 +17,8 @@ const categoryTones: Record<string, string> = {
 
 export function FeaturedProducts({ products }: { products: Product[] }) {
   return (
-    <section className="section-padding bg-ef-black">
-      <div className="container-ef">
+    <section className="section-padding bg-arq-black">
+      <div className="container-arq">
         <SectionHeader
           eyebrow="Catálogo"
           title="Productos"
@@ -69,7 +69,7 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
 
                   {/* Hover arrow */}
                   <div className="absolute top-4 right-4 p-2 rounded-sm glass opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">
-                    <ArrowUpRight size={13} className="text-ef-white" />
+                    <ArrowUpRight size={13} className="text-arq-white" />
                   </div>
                   {/* Category badge */}
                   <div className="absolute top-4 left-4">
@@ -79,35 +79,35 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
 
                 {/* Content */}
                 <div className="p-5">
-                  <h3 className="font-medium text-ef-white text-sm mb-1.5 group-hover:text-ef-white/90 transition-colors leading-snug">
+                  <h3 className="font-medium text-arq-white text-sm mb-1.5 group-hover:text-arq-white/90 transition-colors leading-snug">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-ef-dim leading-relaxed mb-4 line-clamp-2 font-light">
+                  <p className="text-xs text-arq-dim leading-relaxed mb-4 line-clamp-2 font-light">
                     {product.description}
                   </p>
 
                   {/* Feature icons */}
-                  <div className="flex items-center gap-3 pt-3 border-t border-ef-border">
+                  <div className="flex items-center gap-3 pt-3 border-t border-arq-border">
                     {product.hasLED && (
-                      <div className="flex items-center gap-1 text-xs text-ef-dim">
+                      <div className="flex items-center gap-1 text-xs text-arq-dim">
                         <Zap size={11} />
                         LED
                       </div>
                     )}
                     {product.hasUSB && (
-                      <div className="flex items-center gap-1 text-xs text-ef-dim">
+                      <div className="flex items-center gap-1 text-xs text-arq-dim">
                         <Usb size={11} />
                         USB
                       </div>
                     )}
                     {product.hasWirelessCharging && (
-                      <div className="flex items-center gap-1 text-xs text-ef-dim">
+                      <div className="flex items-center gap-1 text-xs text-arq-dim">
                         <Wifi size={11} />
                         Qi
                       </div>
                     )}
                     <div className="ml-auto">
-                      <span className="text-xs text-ef-dim/60">
+                      <span className="text-xs text-arq-dim/60">
                         {product.colors.length} colores
                       </span>
                     </div>
@@ -129,10 +129,10 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
               href="/catalogo"
               className="group flex flex-col items-center justify-center h-full min-h-[280px] glass rounded-xl border-dashed transition-all duration-300 hover:-translate-y-1 hover:border-white/10"
             >
-              <div className="w-10 h-10 rounded-sm border border-ef-border flex items-center justify-center mb-4 group-hover:border-white/20 transition-colors">
-                <ArrowUpRight size={18} className="text-ef-dim group-hover:text-ef-white transition-colors" />
+              <div className="w-10 h-10 rounded-sm border border-arq-border flex items-center justify-center mb-4 group-hover:border-white/20 transition-colors">
+                <ArrowUpRight size={18} className="text-arq-dim group-hover:text-arq-white transition-colors" />
               </div>
-              <span className="text-xs font-light text-ef-dim group-hover:text-ef-white transition-colors tracking-wide">
+              <span className="text-xs font-light text-arq-dim group-hover:text-arq-white transition-colors tracking-wide">
                 Ver catálogo completo
               </span>
             </Link>

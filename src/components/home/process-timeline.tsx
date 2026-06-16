@@ -45,7 +45,7 @@ export function ProcessTimeline() {
       {/* Top rule */}
       <div className="rule" />
 
-      <div className="container-ef">
+      <div className="container-arq">
         <SectionHeader
           eyebrow="Proceso"
           title="Del concepto"
@@ -73,23 +73,23 @@ export function ProcessTimeline() {
                   <div className="flex flex-col items-center mb-6">
                     <div className="relative">
                       <div className="w-20 h-20 rounded-sm glass flex items-center justify-center border border-white/[0.06]">
-                        <Icon size={24} className="text-ef-dim" />
+                        <Icon size={24} className="text-arq-dim" />
                       </div>
-                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-sm bg-ef-black border border-ef-border flex items-center justify-center">
-                        <span className="text-[10px] font-semibold text-ef-dim">{step.number}</span>
+                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-sm bg-arq-black border border-arq-border flex items-center justify-center">
+                        <span className="text-[10px] font-semibold text-arq-dim">{step.number}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="text-center">
-                    <h3 className="text-base font-medium text-ef-white mb-2">
+                    <h3 className="text-base font-medium text-arq-white mb-2">
                       {step.title}
                     </h3>
-                    <p className="text-sm text-ef-dim leading-relaxed mb-4 font-light">
+                    <p className="text-sm text-arq-dim leading-relaxed mb-4 font-light">
                       {step.description}
                     </p>
-                    <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs bg-white/[0.04] text-ef-dim border border-white/[0.06] font-light">
+                    <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs bg-white/[0.04] text-arq-dim border border-white/[0.06] font-light">
                       {step.detail}
                     </span>
                   </div>

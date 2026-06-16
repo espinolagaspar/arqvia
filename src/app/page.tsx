@@ -11,7 +11,7 @@ import { getProjects } from "@/lib/projects/store";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "efstudio — Muebles Modernos Tecnológicos",
+  title: "ARQVIA — Muebles Modernos Tecnológicos",
   description:
     "Muebles modernos de melamina premium con LED, USB y carga inalámbrica. Diseño minimalista y fabricación premium en Argentina.",
 };

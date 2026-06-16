@@ -21,12 +21,12 @@ export function WhatsAppButton() {
           >
             <button
               onClick={() => setShowTooltip(false)}
-              className="absolute top-2 right-2 text-ef-dim hover:text-ef-white transition-colors"
+              className="absolute top-2 right-2 text-arq-dim hover:text-arq-white transition-colors"
             >
               <X size={12} />
             </button>
-            <p className="text-xs text-ef-dim mb-1 font-light">efstudio</p>
-            <p className="text-sm text-ef-white font-medium mb-3 leading-snug">
+            <p className="text-xs text-arq-dim mb-1 font-light">ARQVIA</p>
+            <p className="text-sm text-arq-white font-medium mb-3 leading-snug">
               Hola! ¿Querés cotizar tu mueble ideal?
             </p>
             <a

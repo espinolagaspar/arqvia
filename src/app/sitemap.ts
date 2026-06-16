@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { getProducts } from "@/lib/products/store";
 
-const BASE_URL = "https://efstudio.com.ar";
+const BASE_URL = "https://arqvia.com.ar";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await getProducts();

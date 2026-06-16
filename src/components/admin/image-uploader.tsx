@@ -118,14 +118,14 @@ export function ImageUploader({
           e.preventDefault();
           if (!busy) handleFiles(e.dataTransfer.files);
         }}
-        className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-ef-border bg-white/[0.02] py-10 cursor-pointer hover:border-white/20 transition-colors"
+        className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-arq-border bg-white/[0.02] py-10 cursor-pointer hover:border-white/20 transition-colors"
       >
         {busy ? (
-          <Loader2 size={20} className="text-ef-dim animate-spin" />
+          <Loader2 size={20} className="text-arq-dim animate-spin" />
         ) : (
-          <Upload size={20} className="text-ef-dim" />
+          <Upload size={20} className="text-arq-dim" />
         )}
-        <span className="text-sm text-ef-dim font-light">
+        <span className="text-sm text-arq-dim font-light">
           {uploading && progress
             ? `Subiendo ${progress.done}/${progress.total}…`
             : busy
@@ -153,7 +153,7 @@ export function ImageUploader({
             return (
               <div
                 key={img.pathname}
-                className="group relative rounded-lg overflow-hidden border border-ef-border"
+                className="group relative rounded-lg overflow-hidden border border-arq-border"
               >
                 <div className="relative aspect-[4/3] bg-white/[0.04]">
                   <Image
@@ -166,7 +166,7 @@ export function ImageUploader({
                 </div>
 
                 {isCover && (
-                  <span className="absolute top-2 left-2 flex items-center gap-1 rounded-sm bg-ef-white text-ef-black text-[10px] font-medium px-2 py-0.5">
+                  <span className="absolute top-2 left-2 flex items-center gap-1 rounded-sm bg-arq-white text-arq-black text-[10px] font-medium px-2 py-0.5">
                     <Star size={10} className="fill-current" />
                     Portada
                   </span>
@@ -180,7 +180,7 @@ export function ImageUploader({
                       title="Mover izquierda"
                       disabled={busy || i === 0}
                       onClick={() => move(i, -1)}
-                      className="p-1 rounded-sm bg-white/10 text-ef-white hover:bg-white/20 disabled:opacity-30"
+                      className="p-1 rounded-sm bg-white/10 text-arq-white hover:bg-white/20 disabled:opacity-30"
                     >
                       <ArrowLeft size={12} />
                     </button>
@@ -189,7 +189,7 @@ export function ImageUploader({
                       title="Mover derecha"
                       disabled={busy || i === images.length - 1}
                       onClick={() => move(i, 1)}
-                      className="p-1 rounded-sm bg-white/10 text-ef-white hover:bg-white/20 disabled:opacity-30"
+                      className="p-1 rounded-sm bg-white/10 text-arq-white hover:bg-white/20 disabled:opacity-30"
                     >
                       <ArrowRight size={12} />
                     </button>
@@ -206,7 +206,7 @@ export function ImageUploader({
                             router.refresh();
                           })
                         }
-                        className="p-1 rounded-sm bg-white/10 text-ef-white hover:bg-white/20 disabled:opacity-30"
+                        className="p-1 rounded-sm bg-white/10 text-arq-white hover:bg-white/20 disabled:opacity-30"
                       >
                         <Star size={12} />
                       </button>
@@ -221,7 +221,7 @@ export function ImageUploader({
                           router.refresh();
                         })
                       }
-                      className="p-1 rounded-sm bg-white/10 text-ef-white hover:bg-red-500/80 disabled:opacity-30"
+                      className="p-1 rounded-sm bg-white/10 text-arq-white hover:bg-red-500/80 disabled:opacity-30"
                     >
                       <Trash2 size={12} />
                     </button>

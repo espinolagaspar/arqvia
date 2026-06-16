@@ -27,7 +27,7 @@ export function DeleteProjectButton({
           startTransition(() => deleteProjectAction(id));
         }
       }}
-      className="flex items-center gap-1.5 text-xs text-ef-dim hover:text-red-400 transition-colors disabled:opacity-50"
+      className="flex items-center gap-1.5 text-xs text-arq-dim hover:text-red-400 transition-colors disabled:opacity-50"
     >
       <Trash2 size={13} />
       {pending ? "Eliminando…" : "Eliminar"}

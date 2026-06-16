@@ -23,10 +23,10 @@ export default async function EditProductPage({
   if (!product) notFound();
 
   return (
-    <div className="container-ef py-12 max-w-3xl">
+    <div className="container-arq py-12 max-w-3xl">
       <Link
         href="/admin/productos"
-        className="inline-flex items-center gap-2 text-sm text-ef-dim hover:text-ef-white transition-colors mb-8"
+        className="inline-flex items-center gap-2 text-sm text-arq-dim hover:text-arq-white transition-colors mb-8"
       >
         <ArrowLeft size={14} />
         Volver al catálogo
@@ -37,7 +37,7 @@ export default async function EditProductPage({
       </h1>
 
       <section className="mb-12">
-        <h2 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-ef-dim/50 mb-4">
+        <h2 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-arq-dim/50 mb-4">
           Fotos del producto
         </h2>
         <ImageUploader
@@ -55,7 +55,7 @@ export default async function EditProductPage({
       </section>
 
       <section>
-        <h2 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-ef-dim/50 mb-4">
+        <h2 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-arq-dim/50 mb-4">
           Datos del producto
         </h2>
         <ProductForm product={product} />

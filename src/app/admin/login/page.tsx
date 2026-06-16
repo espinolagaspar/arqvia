@@ -12,14 +12,14 @@ export default async function LoginPage({
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
           <div className="flex items-center justify-center gap-1.5 mb-3">
-            <span className="text-2xl font-semibold tracking-tight text-ef-white">
-              ef
+            <span className="text-2xl font-semibold tracking-tight text-arq-white">
+              ARQ
             </span>
-            <span className="text-2xl font-light tracking-tight text-ef-dim">
-              studio
+            <span className="text-2xl font-light tracking-tight text-arq-dim">
+              VIA
             </span>
           </div>
-          <p className="text-xs text-ef-dim/60 tracking-wide uppercase">
+          <p className="text-xs text-arq-dim/60 tracking-wide uppercase">
             Panel de administración
           </p>
         </div>

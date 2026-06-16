@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://efstudio.com.ar/sitemap.xml",
+    sitemap: "https://arqvia.com.ar/sitemap.xml",
   };
 }

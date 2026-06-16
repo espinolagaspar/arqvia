@@ -16,11 +16,11 @@ export default async function ProyectosPage() {
   const projects = await getProjects();
 
   return (
-    <div className="min-h-screen bg-ef-black">
+    <div className="min-h-screen bg-arq-black">
       {/* Hero */}
       <div className="relative pt-36 pb-16 overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px rule" />
-        <div className="container-ef relative">
+        <div className="container-arq relative">
           <SectionHeader
             eyebrow="Portfolio"
             title="Proyectos"
@@ -32,17 +32,17 @@ export default async function ProyectosPage() {
       </div>
 
       {/* Projects Grid */}
-      <div className="container-ef pb-24">
+      <div className="container-arq pb-24">
         <ProjectsGrid projects={projects} />
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-20 pt-16 border-t border-ef-border">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-20 pt-16 border-t border-arq-border">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center glass rounded-lg p-6">
-              <div className="text-2xl font-semibold text-ef-white mb-1 tracking-tight">
+              <div className="text-2xl font-semibold text-arq-white mb-1 tracking-tight">
                 {stat.value}
               </div>
-              <div className="text-xs text-ef-dim font-light">{stat.label}</div>
+              <div className="text-xs text-arq-dim font-light">{stat.label}</div>
             </div>
           ))}
         </div>

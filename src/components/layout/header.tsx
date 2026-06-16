@@ -44,20 +44,20 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-ef-black/90 backdrop-blur-md border-b border-white/[0.04]"
+            ? "bg-arq-black/90 backdrop-blur-md border-b border-white/[0.04]"
             : "bg-transparent"
         )}
       >
-        <div className="container-ef">
+        <div className="container-arq">
           <div className="flex items-center justify-between h-16 md:h-18">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
               <div className="flex items-center">
-                <span className="text-xl font-semibold tracking-tight text-ef-white">
-                  ef
+                <span className="text-xl font-semibold tracking-tight text-arq-white">
+                  ARQ
                 </span>
-                <span className="text-xl font-light tracking-tight text-ef-dim">
-                  studio
+                <span className="text-xl font-light tracking-tight text-arq-dim">
+                  VIA
                 </span>
               </div>
             </Link>
@@ -71,15 +71,15 @@ export function Header() {
                   className={cn(
                     "text-sm transition-colors duration-200 relative",
                     pathname === link.href
-                      ? "text-ef-white font-medium"
-                      : "text-ef-dim hover:text-ef-white font-normal"
+                      ? "text-arq-white font-medium"
+                      : "text-arq-dim hover:text-arq-white font-normal"
                   )}
                 >
                   {link.label}
                   {pathname === link.href && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-px bg-ef-white/30"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-arq-white/30"
                     />
                   )}
                 </Link>
@@ -97,7 +97,7 @@ export function Header() {
 
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="md:hidden p-2 text-ef-dim hover:text-ef-white transition-colors"
+                className="md:hidden p-2 text-arq-dim hover:text-arq-white transition-colors"
                 aria-label="Menú"
               >
                 {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -115,7 +115,7 @@ export function Header() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed inset-0 z-40 bg-ef-black flex flex-col pt-20 px-6"
+            className="fixed inset-0 z-40 bg-arq-black flex flex-col pt-20 px-6"
           >
             <nav className="flex flex-col gap-1">
               {navLinks.map((link, i) => (
@@ -128,10 +128,10 @@ export function Header() {
                   <Link
                     href={link.href}
                     className={cn(
-                      "block py-4 text-2xl font-light border-b border-ef-border transition-colors",
+                      "block py-4 text-2xl font-light border-b border-arq-border transition-colors",
                       pathname === link.href
-                        ? "text-ef-white"
-                        : "text-ef-dim hover:text-ef-white"
+                        ? "text-arq-white"
+                        : "text-arq-dim hover:text-arq-white"
                     )}
                   >
                     {link.label}

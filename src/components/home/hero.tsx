@@ -17,7 +17,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center overflow-hidden bg-ef-black"
+      className="relative min-h-screen flex items-center overflow-hidden bg-arq-black"
     >
       {/* Background — subtle depth, no cyber */}
       <div className="absolute inset-0">
@@ -51,7 +51,7 @@ export function Hero() {
       {/* Content */}
       <motion.div
         style={{ opacity }}
-        className="container-ef relative z-10 pt-20"
+        className="container-arq relative z-10 pt-20"
       >
         <div className="max-w-2xl lg:max-w-3xl">
           {/* Eyebrow */}
@@ -61,8 +61,8 @@ export function Hero() {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             className="flex items-center gap-3 mb-10"
           >
-            <div className="w-6 h-px bg-ef-dim/40" />
-            <span className="text-xs font-normal tracking-[0.18em] uppercase text-ef-dim">
+            <div className="w-6 h-px bg-arq-dim/40" />
+            <span className="text-xs font-normal tracking-[0.18em] uppercase text-arq-dim">
               Diseño · Fabricación · Tecnología integrada
             </span>
           </motion.div>
@@ -72,7 +72,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.08, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-light tracking-[-0.03em] text-ef-white leading-[1.05] mb-7"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-light tracking-[-0.03em] text-arq-white leading-[1.05] mb-7"
           >
             Muebles que
             <br />
@@ -84,7 +84,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-base sm:text-lg text-ef-dim leading-relaxed mb-12 max-w-lg font-light"
+            className="text-base sm:text-lg text-arq-dim leading-relaxed mb-12 max-w-lg font-light"
           >
             Melamina premium, tecnología integrada y fabricación de precisión.
             Cada pieza diseñada para transformar cómo vivís tu espacio.
@@ -122,10 +122,10 @@ export function Hero() {
               { value: "100%", label: "Fabricación propia" },
             ].map((stat) => (
               <div key={stat.label}>
-                <div className="text-xl font-semibold text-ef-white tracking-tight">
+                <div className="text-xl font-semibold text-arq-white tracking-tight">
                   {stat.value}
                 </div>
-                <div className="text-xs text-ef-dim mt-1 font-light">{stat.label}</div>
+                <div className="text-xs text-arq-dim mt-1 font-light">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -139,14 +139,14 @@ export function Hero() {
         transition={{ delay: 1.4 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-[10px] text-ef-dim/50 tracking-[0.2em] uppercase font-light">
+        <span className="text-[10px] text-arq-dim/50 tracking-[0.2em] uppercase font-light">
           Scroll
         </span>
         <motion.div
           animate={{ y: [0, 5, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown size={14} className="text-ef-dim/40" />
+          <ChevronDown size={14} className="text-arq-dim/40" />
         </motion.div>
       </motion.div>
     </section>

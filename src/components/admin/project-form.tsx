@@ -20,9 +20,9 @@ function SaveButton() {
 }
 
 const fieldClass =
-  "mt-2 w-full rounded-sm bg-white/[0.04] border border-ef-border px-3 py-2.5 text-sm text-ef-white outline-none focus:border-white/20";
+  "mt-2 w-full rounded-sm bg-white/[0.04] border border-arq-border px-3 py-2.5 text-sm text-arq-white outline-none focus:border-white/20";
 const labelClass =
-  "text-[10px] uppercase tracking-[0.15em] text-ef-dim/60";
+  "text-[10px] uppercase tracking-[0.15em] text-arq-dim/60";
 
 export function ProjectForm({ project }: { project: Project }) {
   const action = updateProjectAction.bind(null, project.id);
