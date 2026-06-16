@@ -20,7 +20,7 @@ export default async function LoginPage({
             </span>
           </div>
           <p className="text-xs text-arq-dim/60 tracking-wide uppercase">
-            Panel de administración
+            Solo administradores
           </p>
         </div>
         <div className="glass rounded-lg p-8">

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AdminLoginModal } from "@/components/layout/admin-login-modal";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -87,7 +88,9 @@ export function Header() {
             </nav>
 
             {/* CTA + Mobile menu */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
+              <AdminLoginModal className="hidden md:inline-flex" />
+
               <Link
                 href="/cotizacion"
                 className="hidden md:flex btn-primary text-sm py-2 px-5"
@@ -149,6 +152,9 @@ export function Header() {
               <Link href="/cotizacion" className="btn-primary w-full justify-center">
                 Cotizar ahora
               </Link>
+              <div className="mt-6 flex justify-center">
+                <AdminLoginModal />
+              </div>
             </motion.div>
           </motion.div>
         )}
