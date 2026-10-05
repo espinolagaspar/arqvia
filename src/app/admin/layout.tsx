@@ -17,7 +17,7 @@ export default async function AdminLayout({
   const authed = await verifySession(store.get(SESSION_COOKIE)?.value);
 
   return (
-    <div className="min-h-screen bg-arq-black text-arq-white">
+    <div className="admin-scope min-h-screen bg-arq-black text-arq-white">
       {authed && <AdminHeader />}
       {children}
     </div>

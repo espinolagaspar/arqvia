@@ -1,36 +1,36 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Newsreader } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { WhatsAppButton } from "@/components/layout/whatsapp-button";
+import { SITE_URL } from "@/lib/utils";
 
 const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
 });
 
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+});
+
+const TITLE = "ARQVIA — Diseño, fabricación e instalación de muebles a medida";
+const DESCRIPTION =
+  "Diseñamos, fabricamos e instalamos mobiliario a medida: cocinas, vestidores, placares, living, dormitorios y oficinas. CABA y GBA.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "ARQVIA — Muebles Modernos Tecnológicos",
+    default: TITLE,
     template: "%s | ARQVIA",
   },
-  description:
-    "Muebles modernos de melamina premium con diseño minimalista, iluminación LED, carga USB e inalámbrica. Fabricación premium para dormitorios, oficinas y setups gamer en Argentina.",
+  description: DESCRIPTION,
   keywords: [
-    "muebles modernos",
-    "muebles melamina premium",
-    "mesas de luz modernas",
-    "muebles LED",
-    "escritorios gamer",
-    "muebles minimalistas",
-    "muebles premium Argentina",
-    "muebles tecnológicos",
-    "muebles con USB",
-    "setup home office",
-    "muebles flotantes",
-    "ARQVIA",
+    "muebles a medida",
+    "cocinas a medida",
+    "vestidores",
+    "placares",
+    "mobiliario integral",
+    "Buenos Aires",
   ],
   authors: [{ name: "ARQVIA" }],
   creator: "ARQVIA",
@@ -38,15 +38,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_AR",
     siteName: "ARQVIA",
-    title: "ARQVIA — Muebles Modernos Tecnológicos",
-    description:
-      "Diseño minimalista, tecnología integrada y fabricación premium.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "ARQVIA — Muebles Modernos Tecnológicos",
-    description:
-      "Diseño minimalista, tecnología integrada y fabricación premium.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
   robots: {
     index: true,
@@ -59,12 +57,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es-AR" className={`${geist.variable} dark`}>
-      <body className="min-h-screen bg-arq-black text-arq-white font-geist antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+    <html lang="es-AR" className={`${geist.variable} ${newsreader.variable}`}>
+      <body className="min-h-screen bg-arq-bone text-arq-ink font-sans antialiased">
+        {children}
       </body>
     </html>
   );

@@ -1,164 +1,131 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { AdminLoginModal } from "@/components/layout/admin-login-modal";
+import { useSite } from "@/components/layout/site-context";
+import { CONTACT_EMAIL } from "@/lib/utils";
 
 const navLinks = [
-  { href: "/", label: "Inicio" },
-  { href: "/catalogo", label: "Catálogo" },
-  { href: "/proyectos", label: "Proyectos" },
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/contacto", label: "Contacto" },
+  { href: "/#proyectos", label: "Proyectos" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/#nosotros", label: "Nosotros" },
+  { href: "/#contacto", label: "Contacto" },
 ];
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { menuOpen, setMenuOpen, waUrl } = useSite();
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
     setMenuOpen(false);
-  }, [pathname]);
+  }, [pathname, setMenuOpen]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
+
+  // Si la ventana pasa a desktop con el menú abierto, lo cierra.
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 820px)");
+    const onChange = () => {
+      if (desktop.matches) setMenuOpen(false);
+    };
+    desktop.addEventListener("change", onChange);
+    return () => desktop.removeEventListener("change", onChange);
+  }, [setMenuOpen]);
 
   return (
     <>
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled
-            ? "bg-arq-black/90 backdrop-blur-md border-b border-white/[0.04]"
-            : "bg-transparent"
-        )}
-      >
-        <div className="container-arq">
-          <div className="flex items-center justify-between h-16 md:h-18">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="flex items-center">
-                <span className="text-xl font-semibold tracking-tight text-arq-white">
-                  ARQ
-                </span>
-                <span className="text-xl font-light tracking-tight text-arq-dim">
-                  VIA
-                </span>
-              </div>
-            </Link>
+      <header className="fixed inset-x-0 top-0 z-50 h-16 border-b border-[rgba(26,25,23,0.10)] bg-[rgba(241,237,230,0.92)] backdrop-blur-[10px]">
+        <div className="wrap flex h-full items-center justify-between gap-6">
+          <Link
+            href="/"
+            onClick={() => setMenuOpen(false)}
+            className="link flex h-11 items-center text-[14px] font-medium tracking-[0.22em]"
+          >
+            ARQVIA
+          </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "text-sm transition-colors duration-200 relative",
-                    pathname === link.href
-                      ? "text-arq-white font-medium"
-                      : "text-arq-dim hover:text-arq-white font-normal"
-                  )}
-                >
-                  {link.label}
-                  {pathname === link.href && (
-                    <motion.span
-                      layoutId="nav-indicator"
-                      className="absolute -bottom-1 left-0 right-0 h-px bg-arq-white/30"
-                    />
-                  )}
-                </Link>
-              ))}
-            </nav>
-
-            {/* CTA + Mobile menu */}
-            <div className="flex items-center gap-4">
-              <AdminLoginModal className="hidden md:inline-flex" />
-
+          <nav
+            aria-label="Principal"
+            className="hidden items-center gap-9 text-[14px] nav:flex"
+          >
+            {navLinks.map((link) => (
               <Link
-                href="/cotizacion"
-                className="hidden md:flex btn-primary text-sm py-2 px-5"
+                key={link.href}
+                href={link.href}
+                className="link flex h-11 items-center"
               >
-                Cotizar
+                {link.label}
               </Link>
+            ))}
+          </nav>
 
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="md:hidden p-2 text-arq-dim hover:text-arq-white transition-colors"
-                aria-label="Menú"
-              >
-                {menuOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-line hidden h-11 text-[14px] nav:inline-flex"
+          >
+            WhatsApp <span className="text-[12px]">↗</span>
+          </a>
+
+          <div className="flex items-center gap-5 nav:hidden">
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link flex h-11 items-center text-[14px]"
+            >
+              WhatsApp
+            </a>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-expanded={menuOpen}
+              aria-controls="menu-mobile"
+              className="flex h-11 cursor-pointer items-center pl-2 text-[14px]"
+            >
+              {menuOpen ? "Cerrar" : "Menú"}
+            </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed inset-0 z-40 bg-arq-black flex flex-col pt-20 px-6"
-          >
-            <nav className="flex flex-col gap-1">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: 16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.3 }}
-                >
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      "block py-4 text-2xl font-light border-b border-arq-border transition-colors",
-                      pathname === link.href
-                        ? "text-arq-white"
-                        : "text-arq-dim hover:text-arq-white"
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mt-8"
-            >
-              <Link href="/cotizacion" className="btn-primary w-full justify-center">
-                Cotizar ahora
+      {menuOpen && (
+        <div
+          id="menu-mobile"
+          className="fixed inset-x-0 bottom-0 top-16 z-[49] flex flex-col justify-between overflow-y-auto bg-arq-bone px-5 pb-10 pt-6 nav:hidden"
+        >
+          <nav aria-label="Menú" className="flex flex-col">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="border-b border-[rgba(26,25,23,0.12)] py-[18px] font-serif text-[44px] font-light leading-none"
+              >
+                {link.label}
               </Link>
-              <div className="mt-6 flex justify-center">
-                <AdminLoginModal />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+          </nav>
+          <div className="mt-10 flex flex-col gap-3 text-[14px] text-arq-stone">
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-ink"
+            >
+              Hablar por WhatsApp
+            </a>
+            <span>CABA y GBA · {CONTACT_EMAIL}</span>
+          </div>
+        </div>
+      )}
     </>
   );
 }

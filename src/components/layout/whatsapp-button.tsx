@@ -1,57 +1,43 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X } from "lucide-react";
-import { formatWhatsAppUrl, WHATSAPP_DEFAULT_MSG } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { useSite } from "@/components/layout/site-context";
+import { cn } from "@/lib/utils";
 
+/** Pastilla fija: aparece al pasar el 70% del alto del viewport. */
 export function WhatsAppButton() {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const { menuOpen, waUrl } = useSite();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () =>
+      setScrolled(window.scrollY > window.innerHeight * 0.7);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  const visible = scrolled && !menuOpen;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      <AnimatePresence>
-        {showTooltip && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 6 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 6 }}
-            transition={{ duration: 0.2 }}
-            className="glass rounded-lg p-4 w-60 shadow-2xl border border-white/[0.06]"
-          >
-            <button
-              onClick={() => setShowTooltip(false)}
-              className="absolute top-2 right-2 text-arq-dim hover:text-arq-white transition-colors"
-            >
-              <X size={12} />
-            </button>
-            <p className="text-xs text-arq-dim mb-1 font-light">ARQVIA</p>
-            <p className="text-sm text-arq-white font-medium mb-3 leading-snug">
-              Hola! ¿Querés cotizar tu mueble ideal?
-            </p>
-            <a
-              href={formatWhatsAppUrl(WHATSAPP_DEFAULT_MSG)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2 rounded-sm bg-green-600 text-white text-sm font-medium hover:bg-green-500 transition-colors"
-            >
-              <MessageCircle size={13} />
-              Escribinos
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.button
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1.5, type: "spring", stiffness: 220, damping: 22 }}
-        onClick={() => setShowTooltip(!showTooltip)}
-        className="relative w-13 h-13 w-[52px] h-[52px] rounded-full bg-green-600 hover:bg-green-500 text-white shadow-lg flex items-center justify-center transition-colors"
-        aria-label="Contactar por WhatsApp"
-      >
-        <MessageCircle size={22} className="relative z-10" />
-      </motion.button>
-    </div>
+    <a
+      href={waUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Hablar por WhatsApp"
+      aria-hidden={!visible}
+      tabIndex={visible ? 0 : -1}
+      className={cn(
+        "fixed bottom-[clamp(16px,2.4vw,32px)] right-[clamp(16px,2.4vw,32px)] z-40 inline-flex h-11 items-center gap-[10px] bg-arq-ink px-[18px] text-[14px] text-arq-bone shadow-[0_6px_24px_rgba(26,25,23,0.18)] transition-[opacity,visibility,background-color] duration-200 hover:bg-arq-wood",
+        visible ? "visible opacity-100" : "invisible opacity-0",
+      )}
+    >
+      <span className="size-[6px] rounded-full bg-[#7FAE8A]" />
+      WhatsApp
+    </a>
   );
 }

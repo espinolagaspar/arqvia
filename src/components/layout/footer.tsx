@@ -1,120 +1,68 @@
 import Link from "next/link";
-import { Camera, Mail, Phone } from "lucide-react";
+import {
+  CONTACT_EMAIL,
+  INSTAGRAM_URL,
+  WHATSAPP_DISPLAY,
+  formatWhatsAppUrl,
+  whatsAppMessage,
+} from "@/lib/utils";
 
-const footerLinks = {
-  navegacion: [
-    { href: "/", label: "Inicio" },
-    { href: "/catalogo", label: "Catálogo" },
-    { href: "/proyectos", label: "Proyectos" },
-    { href: "/nosotros", label: "Nosotros" },
-    { href: "/cotizacion", label: "Cotización" },
-    { href: "/contacto", label: "Contacto" },
-  ],
-  categorias: [
-    { href: "/catalogo?cat=dormitorio", label: "Dormitorio" },
-    { href: "/catalogo?cat=living", label: "Living" },
-    { href: "/catalogo?cat=oficina", label: "Oficina" },
-    { href: "/catalogo?cat=cocina", label: "Cocina" },
-  ],
-};
+const navLinks = [
+  { href: "/#proyectos", label: "Proyectos" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/catalogo", label: "Piezas" },
+  { href: "/#nosotros", label: "Nosotros" },
+  { href: "/contacto", label: "Contacto" },
+];
+
+const linkClass = "link flex min-h-11 items-center";
 
 export function Footer() {
   return (
-    <footer className="border-t border-arq-border bg-[#0D0D0D]">
-      <div className="container-arq py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-1.5 mb-5">
-              <span className="text-xl font-semibold tracking-tight text-arq-white">
-                ARQ
-              </span>
-              <span className="text-xl font-light tracking-tight text-arq-dim">
-                VIA
-              </span>
+    <footer className="border-t border-arq-line py-[clamp(40px,5vw,64px)]">
+      <div className="wrap grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-x-[clamp(20px,4vw,64px)] gap-y-9">
+        <div className="flex flex-col gap-3">
+          <span className="text-[14px] font-medium tracking-[0.22em]">
+            ARQVIA
+          </span>
+          <span className="text-[14px] leading-[1.6] text-arq-stone">
+            Diseño, fabricación e instalación de mobiliario a medida. CABA y
+            GBA.
+          </span>
+        </div>
+
+        <nav aria-label="Pie de página" className="flex flex-col text-[14px]">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} className={linkClass}>
+              {link.label}
             </Link>
-            <p className="text-arq-dim text-sm leading-relaxed max-w-xs mb-6 font-light">
-              Muebles contemporáneos con tecnología integrada. Diseño minimalista
-              y fabricación premium para transformar tus espacios.
-            </p>
-            <div className="flex gap-2">
-              <a
-                href="https://instagram.com/arqvia"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 glass rounded-sm text-arq-dim hover:text-arq-white hover:border-white/10 transition-colors"
-                aria-label="Instagram"
-              >
-                <Camera size={15} />
-              </a>
-              <a
-                href="mailto:arqvia.service@gmail.com"
-                className="p-2.5 glass rounded-sm text-arq-dim hover:text-arq-white hover:border-white/10 transition-colors"
-                aria-label="Email"
-              >
-                <Mail size={15} />
-              </a>
-              <a
-                href="https://wa.me/5491132368891"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 glass rounded-sm text-arq-dim hover:text-arq-white hover:border-white/10 transition-colors"
-                aria-label="WhatsApp"
-              >
-                <Phone size={15} />
-              </a>
-            </div>
-          </div>
+          ))}
+        </nav>
 
-          {/* Nav */}
-          <div>
-            <h4 className="text-[10px] font-semibold tracking-[0.15em] uppercase text-arq-dim/50 mb-5">
-              Navegación
-            </h4>
-            <ul className="space-y-2.5">
-              {footerLinks.navegacion.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-arq-dim hover:text-arq-white transition-colors font-light"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Categories */}
-          <div>
-            <h4 className="text-[10px] font-semibold tracking-[0.15em] uppercase text-arq-dim/50 mb-5">
-              Categorías
-            </h4>
-            <ul className="space-y-2.5">
-              {footerLinks.categorias.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-arq-dim hover:text-arq-white transition-colors font-light"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="flex flex-col text-[14px]">
+          <a
+            href={formatWhatsAppUrl(whatsAppMessage())}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`WhatsApp ${WHATSAPP_DISPLAY}`}
+            className={linkClass}
+          >
+            {WHATSAPP_DISPLAY}
+          </a>
+          <a href={`mailto:${CONTACT_EMAIL}`} className={linkClass}>
+            {CONTACT_EMAIL}
+          </a>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
+            Instagram @arqvia
+          </a>
         </div>
 
-        {/* Bottom */}
-        <div className="rule mb-6" />
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-arq-dim/50 font-light">
-            © {new Date().getFullYear()} ARQVIA. Todos los derechos reservados.
-          </p>
-          <p className="text-xs text-arq-dim/50 font-light">
-            Fabricado en Argentina con melamina premium.
-          </p>
-        </div>
+        <span className="self-end text-[13px] text-arq-stone">© ArqVia</span>
       </div>
     </footer>
   );
