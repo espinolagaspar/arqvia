@@ -75,7 +75,11 @@ export default async function AdminProyectosPage() {
                   {project.title}
                 </h3>
                 <p className="text-xs text-arq-dim font-light truncate">
-                  {[project.category, project.location, project.year]
+                  {[
+                    project.type,
+                    `/proyectos/${project.slug}`,
+                    project.featured && "Destacado",
+                  ]
                     .filter(Boolean)
                     .join(" · ")}
                 </p>

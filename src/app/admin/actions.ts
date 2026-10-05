@@ -14,12 +14,25 @@ import {
   getProjects,
   saveProjects,
   deleteProjectImages,
+  uniqueSlug,
 } from "@/lib/projects/store";
+import { slugify } from "@/lib/utils";
 import type { Project, ProjectImage } from "@/types";
 
 function revalidateAll(): void {
+  revalidatePath("/");
   revalidatePath("/proyectos");
+  revalidatePath("/proyectos/[slug]", "page");
+  revalidatePath("/sitemap.xml");
   revalidatePath("/admin/proyectos");
+}
+
+/** Lee un campo de lista separada por comas ("a, b, c"). */
+function parseList(value: FormDataEntryValue | null): string[] {
+  return String(value ?? "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
 }
 
 /** Lee el manifest, muta un proyecto por id y vuelve a guardar. */
@@ -77,6 +90,14 @@ export async function createProjectAction(): Promise<void> {
   const project: Project = {
     id: crypto.randomUUID(),
     title: "Nuevo proyecto",
+    slug: uniqueSlug(
+      "nuevo-proyecto",
+      projects.map((p) => p.slug),
+    ),
+    type: "",
+    summary: "",
+    scope: ["Diseño", "Fabricación", "Instalación"],
+    featured: false,
     location: "",
     category: "",
     description: "",
@@ -96,21 +117,28 @@ export async function updateProjectAction(
   formData: FormData,
 ): Promise<void> {
   await requireAuth();
-  const tags = String(formData.get("tags") ?? "")
-    .split(",")
-    .map((t) => t.trim())
-    .filter(Boolean);
-  const accent = String(formData.get("accentColor") ?? "blue");
+  const title = String(formData.get("title") ?? "").trim() || "Sin título";
+  const order = Number.parseInt(String(formData.get("order") ?? ""), 10);
 
+  // El slug tiene que ser único entre todos los proyectos.
+  const others = (await getProjects()).filter((p) => p.id !== id);
+  const slug = uniqueSlug(
+    slugify(String(formData.get("slug") ?? "")) || slugify(title),
+    others.map((p) => p.slug),
+  );
+
+  // Los campos deprecados (location, year, tags, ...) se conservan tal cual.
   await mutateProject(id, (p) => ({
     ...p,
-    title: String(formData.get("title") ?? "").trim() || "Sin título",
-    location: String(formData.get("location") ?? "").trim(),
-    category: String(formData.get("category") ?? "").trim(),
-    description: String(formData.get("description") ?? "").trim(),
-    year: String(formData.get("year") ?? "").trim(),
-    tags,
-    accentColor: accent === "red" ? "red" : "blue",
+    title,
+    slug,
+    type: String(formData.get("type") ?? "").trim(),
+    summary: String(formData.get("summary") ?? "").trim(),
+    body: String(formData.get("body") ?? "").trim() || undefined,
+    materials: parseList(formData.get("materials")),
+    scope: formData.getAll("scope").map(String),
+    featured: formData.get("featured") === "on",
+    order: Number.isNaN(order) ? undefined : order,
   }));
 
   redirect("/admin/proyectos");
