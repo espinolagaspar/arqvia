@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // "Nosotros" es ahora una sección de la home.
+      { source: "/nosotros", destination: "/#nosotros", permanent: false },
+    ];
+  },
 };
 
 export default nextConfig;
